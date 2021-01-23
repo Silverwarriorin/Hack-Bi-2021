@@ -27,7 +27,7 @@ public class HackProject extends JPanel {
         setFocusable(true);
         klist = new Key(this);
         mlist = new Mouse(this);
-        test = new Asteroid();
+        test = new Asteroid(1);
         ship = new Spaceship();
         ship.setSpeed(20);
 
@@ -66,7 +66,7 @@ public class HackProject extends JPanel {
   public void tick()
    {
      test.glide();
-     //repaint(); 
+     repaint(); 
    }
    
   public void keyPressed(KeyEvent e)
