@@ -18,15 +18,27 @@ public class Asteroid extends JPanel{
 
     }
 
+    public int getAsteroidX() {
+    	return x;
+    }
     
+    public int getAsteroidY() {
+    	return y;
+    }
     
-
- 
+    public void setAsteroidX(int x) {
+    	this.x = x;
+    }
+    
+    public void setAsteroidY(int y) {
+    	this.y = y;
+    }
+    
     //I have no clue how to make this work
     public void glide(Asteroid arg)
     {
-        arg.x += (int)(Math.random() * (10) + 1);
-        arg.y += (int)(Math.random() * (10) + 1);
+        arg.setAsteroidX(arg.getAsteroidX() + (int)(Math.random() * (10) + 1));
+        arg.setAsteroidY(arg.getAsteroidX() + (int)(Math.random() * (10) + 1));
 
         repaint();
     }
