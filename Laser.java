@@ -92,7 +92,7 @@ public class Laser {
 	
 	
 	
-	public void paintComponent(Graphics g) {		
+	public void draw(Graphics g) {		
 		Graphics g2d = (Graphics2D) g;
 		
 		g2d.setColor(Color.yellow);
