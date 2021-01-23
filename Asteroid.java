@@ -2,13 +2,13 @@ import javax.swing.JPanel;
 import javax.swing.*;
 import java.awt.*;
 
-public class Asteroid {
+public class Asteroid extends JPanel {
 
     private double size;
 
-    public AsteroidPanel()
+    public void paint(Graphics g)
     {
-        
+        g.fillOval(100, 100, 100, 100);
     }
     public Asteroid()
     {
