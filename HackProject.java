@@ -18,12 +18,14 @@ public class HackProject extends JPanel {
     private Asteroid test = new Asteroid();
     private Spaceship ship = new Spaceship();
 
+   
 
     public HackProject() 
     {
         ticker = new ActiveObject(this, 5);
         setFocusable(true);
         klist = new Key(this);
+        
     }
     
     public static void main(String[] args) {
@@ -55,6 +57,7 @@ public class HackProject extends JPanel {
 
        ship.drawShip(g);
        test.spawn(g);
+       
        
        
    }
