@@ -111,7 +111,7 @@ public class Spaceship extends JPanel
             (int)y, this);
 	}
 	
-	public static void main(String[] args)
+/*	public static void main(String[] args)
 	{
 		Spaceship panel = new Spaceship();
 		
@@ -128,6 +128,6 @@ public class Spaceship extends JPanel
 	       
 	       panel.rotate(Math.toRadians(180));
 	        
-	}
+	}*/
 }
 
