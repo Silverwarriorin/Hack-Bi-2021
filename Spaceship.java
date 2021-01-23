@@ -15,11 +15,11 @@ public class Spaceship extends JPanel
 	private Vector2D v;
 	private BufferedImage srcImg;
 	private BufferedImage img;
-	private Graphics g;
+
 	
-	public Spaceship(Graphics g)
+	public Spaceship()
 	{
-		this.g = g;
+
 		loadImage();
 		v = new Vector2D();
 
@@ -47,27 +47,26 @@ public class Spaceship extends JPanel
 	{
 		x+=v.getX();
 		y+=v.getY();
-		redraw();
 	}
 
 	
 	public void setY(double cy)
 	{
 		y = cy;
-		redraw();
+
 	}
 
 	public void setX(double cx)
 	{
 		x = cx;
-		redraw();
+
 	}
 
 	public void setShipLocation(double cx, double cy)
 	{
 		x = cx;
 		y = cy;
-		redraw();
+
 	}
 
 	public void setVector(double speed, double direction)
@@ -148,7 +147,7 @@ public class Spaceship extends JPanel
 		return h;
 	}
 
-	public void redraw()
+	public void redraw(Graphics g)
 	{
         g.drawImage(img, (int)x, 
             (int)y, this);

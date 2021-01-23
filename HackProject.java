@@ -21,20 +21,17 @@ public class HackProject extends JPanel {
 
     private double shipSpeed = 1.5;
     private double shipDirection = 0;
-    private Graphics g;
-   
 
-    public HackProject(Graphics g) 
+    public HackProject() 
     {
-        this.g = g;
-        ticker = new ActiveObject(this, 10);
         setFocusable(true);
         klist = new Key(this);
         mlist = new Mouse(this);
         test = new Asteroid();
-        ship = new Spaceship(g);
-
+        ship = new Spaceship();
         ship.setSpeed(20);
+
+        ticker = new ActiveObject(this, 10);
     }
     
     public static void main(String[] args) {
@@ -43,8 +40,7 @@ public class HackProject extends JPanel {
         frame.setLocation(200, 100);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setVisible(true);
-        frame.setBackground(Color.BLACK);
-        HackProject driver = new HackProject(frame.getGraphics());
+        HackProject driver = new HackProject();
         frame.add(driver); 
         driver.paintComponent(frame.getGraphics());
         
@@ -62,14 +58,15 @@ public class HackProject extends JPanel {
        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
        RenderingHints.VALUE_ANTIALIAS_ON);
 
-       ship.redraw();
-       test.spawn(g);
+       ship.redraw(getGraphics());
+       test.redraw(getGraphics());
    }
     
    //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
   public void tick()
    {
      test.glide();
+     //repaint(); 
    }
    
   public void keyPressed(KeyEvent e)
@@ -80,7 +77,7 @@ public class HackProject extends JPanel {
         ship.setVector(shipSpeed, shipDirection);
         repaint();  
     }
-    repaint();
+    
   }
 
   public void keyReleased(KeyEvent e)
