@@ -2,7 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class HPBar {
+public class HPBar extends JPanel{
 
 	private int x;
 	private int y;
