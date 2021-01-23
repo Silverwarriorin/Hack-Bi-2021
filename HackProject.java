@@ -1,22 +1,21 @@
 import javax.swing.JPanel;
+import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import java.awt.*;
-import javax.swing.*;
-import java.awt.image.*;
 import javax.swing.JFrame;
-import java.io.*;
 import java.awt.event.*;
 
+public class HackProject extends JPanel {
 
+    /**
+     *
+     */
+    private static final long serialVersionUID = 1L;
 
-public class HackProject extends JPanel 
-{
-    
-    public static void main(String[] args)
-    {         
+    public static void main(String[] args) {
         JFrame frame = new JFrame("HackProject");
         frame.setSize(800, 800);
         frame.setLocation(200, 100);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setVisible(true);
         HackProject driver = new HackProject();
         frame.add(driver);            
@@ -28,6 +27,7 @@ public class HackProject extends JPanel
     
     private static class Key extends KeyAdapter
     { 
+      @Override
       public void keyPressed(KeyEvent e)
       {
              if(e.getKeyCode() == KeyEvent.VK_W){               
@@ -44,7 +44,7 @@ public class HackProject extends JPanel
                }
       }
    }
-
+   @Override
    public void paintComponent(Graphics g)
    {
        super.paintComponent(g);

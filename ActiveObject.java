@@ -1,7 +1,7 @@
 class ActiveObject extends Thread implements Runnable{
 
 	private boolean killed = false;
-	private static int id = 1
+	private static int id = 1;
 	private double pauseTime = 5;
 			
 	private static final ThreadGroup GROUP = new ThreadGroup("HackProject");
