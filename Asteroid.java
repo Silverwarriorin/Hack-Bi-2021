@@ -1,13 +1,15 @@
 import javax.swing.JPanel;
 import javax.swing.*;
+import java.awt.*;
 
 public class Asteroid {
 
-    public void paintComponent(Graphics g)
+    private double size;
+
+    public AsteroidPanel()
     {
         
     }
-
     public Asteroid()
     {
         
