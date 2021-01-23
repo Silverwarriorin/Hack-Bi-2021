@@ -66,6 +66,18 @@ public class HackProject extends JPanel {
   public void tick()
    {
      test.glide();
+     if(test.myX() >= 800)
+      test.setX(1);
+
+     else if(test.myX() <= 0)
+      test.setX(799);
+
+     if(test.myY() >= 800)
+      test.setY(1);
+
+     else if(test.myY() <= 0)
+      test.setY(799);
+
      repaint(); 
    }
    
