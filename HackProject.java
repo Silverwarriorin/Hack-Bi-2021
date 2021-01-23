@@ -9,6 +9,8 @@ public class HackProject extends JPanel {
     /**
      *
      */
+	
+	private ActiveObject ticker;
     private static final long serialVersionUID = 1L;
 
     public static void main(String[] args) {
@@ -20,7 +22,7 @@ public class HackProject extends JPanel {
         HackProject driver = new HackProject();
         frame.add(driver);            
         
-        
+        ticker = new ActiveObject(this, 5);
 
     }
     
@@ -58,6 +60,11 @@ public class HackProject extends JPanel {
        
    }
     
+   //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
+   public void tick()
+   {
+	   
+   }
     //testing push
 
 
