@@ -6,17 +6,17 @@ public class Vector2D
     {
         
     }
-    
-    public void setVector(double speed, double radians)
-    {
-        x = Math.cos(radians)*speed;
-        y = Math.sin(radians)*speed;
-    }
-    
+
     public Vector2D(double x, double y)
     {
         this.x=x;
         this.y=y;
+    }
+
+    public void setVector(double speed, double radians)
+    {
+        x = Math.cos(radians)*speed;
+        y = Math.sin(radians)*speed;
     }
     
     public double getSpeed()

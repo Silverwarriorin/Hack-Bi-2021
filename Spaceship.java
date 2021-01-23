@@ -11,15 +11,18 @@ import javax.swing.*;
 
 public class Spaceship extends JPanel
 {
-    private double x, y, w, h, r;
+    private double x, y, w, h;
 	private Vector2D v;
 	private BufferedImage srcImg;
 	private BufferedImage img;
-
+	private Graphics g;
 	
-	public Spaceship()
+	public Spaceship(Graphics g)
 	{
+		this.g = g;
 		loadImage();
+		v = new Vector2D();
+
 	}
 	
 	private void loadImage()
@@ -40,63 +43,73 @@ public class Spaceship extends JPanel
 		h = img.getHeight(null);
 	}
 	
-	public void translate(double dx, double dy)
+	public void drive()
 	{
-		x+=dx;
-		y+=dy;
-		
-		repaint();
+		x+=v.getX();
+		y+=v.getY();
+		redraw();
 	}
+
 	
 	public void setY(double cy)
 	{
 		y = cy;
-		repaint();
+		redraw();
 	}
 
 	public void setX(double cx)
 	{
 		x = cx;
-		repaint();
+		redraw();
 	}
 
 	public void setShipLocation(double cx, double cy)
 	{
 		x = cx;
 		y = cy;
-		repaint();
+		redraw();
+	}
+
+	public void setVector(double speed, double direction)
+	{
+		v.setVector(speed, direction);
 	}
 	
 	public void checkboundingbox()
     {
-        if(ship.getShipX() > 800)
+        if(getShipX() > 800)
         {
-            ship.setX(1);
+            setX(1);
             repaint();
         }
 
-        if(ship.getShipX() < 0)
+        if(getShipX() < 0)
         {
-            ship.setX(799);
+            setX(799);
             repaint();
         }
 
-        if(ship.getShipY() > 800)
+        if(getShipY() > 800)
         {
-            ship.setY(1);
+            setY(1);
             repaint();
         }
 
-        if(ship.getShipY() < 0)
+        if(getShipY() < 0)
         {
-            ship.setY(799);
+            setY(799);
             repaint();
         }
     }
 
-	public void rotate(double rads)
+	public void setSpeed(double s)
 	{
-		r = r+rads;
+		v.setSpeed(s);
+	}
+	
+	public void setDirection(double rads)
+	{
+		v.setDirection(rads);
 		final double sin = Math.abs(Math.sin(rads));
 		final double cos = Math.abs(Math.cos(rads));
 		final int w = (int) Math.floor(img.getWidth() * cos + srcImg.getHeight() * sin);
@@ -109,25 +122,12 @@ public class Spaceship extends JPanel
 		final AffineTransformOp rotateOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
 		rotateOp.filter(srcImg,rotatedImage);
 		img = rotatedImage;
-		repaint();
-	}
-	
-	public void setSpeed(double s)
-	{
-		v.setSpeed(s);
-	}
-	
-	public void setDirection(double radians)
-	{
-		v.setDirection(radians);
 	}
 	
 	public void setSize(double width, double height)
 	{
 		w = width;
 		h = height;
-		
-		repaint();
 	}
 	
 	public double getShipX() {
@@ -143,17 +143,20 @@ public class Spaceship extends JPanel
 		return w;
 	}
 
-
 	public double getShipHeight()
 	{
 		return h;
 	}
 
-	public void drawShip(Graphics arg)
+	public void redraw()
 	{
-
-        arg.drawImage(img, (int)x, 
+        g.drawImage(img, (int)x, 
             (int)y, this);
+	}
+
+	public double getDirection()
+	{
+		return Math.atan(v.getX()/v.getY());
 	}
 
 	

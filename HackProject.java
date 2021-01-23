@@ -11,8 +11,7 @@ public class HackProject extends JPanel {
     /**
      *
      */
-  
-     
+
     private Key klist;
     private Mouse mlist;
 	  private static ActiveObject ticker;
@@ -20,16 +19,20 @@ public class HackProject extends JPanel {
     private Asteroid test;
     private Spaceship ship;
 
+    private double shipSpeed = 1.5;
+    private double shipDirection = 0;
+    private Graphics g;
    
 
-    public HackProject() 
+    public HackProject(Graphics g) 
     {
-        ticker = new ActiveObject(this, 5);
+        this.g = g;
+        ticker = new ActiveObject(this, 10);
         setFocusable(true);
         klist = new Key(this);
         mlist = new Mouse(this);
         test = new Asteroid();
-        ship = new Spaceship();
+        ship = new Spaceship(g);
 
         ship.setSpeed(20);
     }
@@ -40,85 +43,72 @@ public class HackProject extends JPanel {
         frame.setLocation(200, 100);
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setVisible(true);
-        HackProject driver = new HackProject();
+        frame.setBackground(Color.BLACK);
+        HackProject driver = new HackProject(frame.getGraphics());
         frame.add(driver); 
         driver.paintComponent(frame.getGraphics());
         
         frame.addKeyListener(driver.getKeyListener());
         frame.addMouseMotionListener(driver.getMouseListener());
-                  
-        
-        
         	//test
-        
     }
     
     
    @Override
-   public void paintComponent(Graphics g)
+  public void paintComponent(Graphics g)
    {
        super.paintComponent(g);
        Graphics2D g2d = (Graphics2D) g;
        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
        RenderingHints.VALUE_ANTIALIAS_ON);
 
-       ship.drawShip(g);
+       ship.redraw();
        test.spawn(g);
    }
     
    //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
-   public void tick()
+  public void tick()
    {
-     test.glide(test);
+     test.glide();
    }
    
-   public void keyPressed(KeyEvent e)
-
-   {
+  public void keyPressed(KeyEvent e)
+  {
 
     if(e.getKeyCode() == KeyEvent.VK_W)
     {
-        ship.translate(0,-10);
+        ship.setVector(shipSpeed, shipDirection);
         repaint();  
     }
-        
-    if(e.getKeyCode() == KeyEvent.VK_A)
-    {
-        ship.translate(-10,0);
-        repaint();
-    }
-        
-
-    if(e.getKeyCode() == KeyEvent.VK_D)
-    {
-        ship.translate(10,0);
-        repaint();
-    }
-        
-    if(e.getKeyCode() == KeyEvent.VK_S)
-    {
-        ship.translate(0,10);
-        repaint();
-    }
-    System.out.println(e.toString());
-
     repaint();
-   }
+  }
 
-   public Key getKeyListener()
-   {
-     return klist;
-   }
+  public void keyReleased(KeyEvent e)
+  {
+    if(e.getKeyCode() == KeyEvent.VK_W)
+    {
+        ship.setSpeed(0);
+        repaint();  
+    }
+  }
 
-   public Mouse getMouseListener()
-   {
-     return mlist;
-   }
+  public Key getKeyListener()
+  {
+    return klist;
+  }
 
-   public void mouseMoved(MouseEvent e)
-   {
-      System.out.println(e);
-   }
+  public Mouse getMouseListener()
+  {
+    return mlist;
+  }
+
+  public void mouseMoved(MouseEvent e)
+  {
+    shipDirection = Math.atan(e.getY()-ship.getShipY()/e.getX()-ship.getShipX());
+    ship.setDirection(shipDirection);
+    
+    repaint();
+  }
 }
 
 class Key implements KeyListener
