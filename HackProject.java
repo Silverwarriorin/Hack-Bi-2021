@@ -13,6 +13,7 @@ public class HackProject extends JPanel {
 	private ActiveObject ticker;
     private static final long serialVersionUID = 1L;
 
+    Asteroid test = new Asteroid();
     public static void main(String[] args) {
         JFrame frame = new JFrame("HackProject");
         frame.setSize(800, 800);
@@ -20,7 +21,8 @@ public class HackProject extends JPanel {
         frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         frame.setVisible(true);
         HackProject driver = new HackProject();
-        frame.add(driver);            
+        frame.add(driver); 
+                  
         
         ticker = new ActiveObject(this, 5);
         	//test
@@ -56,16 +58,15 @@ public class HackProject extends JPanel {
        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
        RenderingHints.VALUE_ANTIALIAS_ON);
 
-       Asteroid test = new Asteroid();
+       
        test.spawn(g);
-       test.glide(test);
        
    }
     
    //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
    public void tick()
    {
-	   
+     test.glide(test);
    }
     //testing push
 

@@ -17,6 +17,8 @@ public class Asteroid extends JPanel{
     {
         arg.x += (int)(Math.random() * (10) + 1);
         arg.y += (int)(Math.random() * (10) + 1);
+
+        repaint();
     }
 
     //spawn method
