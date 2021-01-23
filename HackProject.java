@@ -24,6 +24,7 @@ public class HackProject extends JPanel {
             
     }
     Asteroid test = new Asteroid();
+    Spaceship ship = new Spaceship();
     public static void main(String[] args) {
         JFrame frame = new JFrame("HackProject");
         frame.setSize(800, 800);
@@ -32,6 +33,8 @@ public class HackProject extends JPanel {
         frame.setVisible(true);
         HackProject driver = new HackProject();
         frame.add(driver); 
+        driver.paintComponent(frame.getGraphics());
+        
                   
         
         
@@ -68,8 +71,9 @@ public class HackProject extends JPanel {
        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
        RenderingHints.VALUE_ANTIALIAS_ON);
 
-       
+       ship.drawShip(g);
        test.spawn(g);
+       
        
    }
     

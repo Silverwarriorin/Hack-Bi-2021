@@ -25,7 +25,7 @@ public class Spaceship extends JPanel
 	{
 		try
 		{
-			srcImg = ImageIO.read(new File("E:\\gitshit\\Hack-Bi-2021\\spaceship.png"));
+			srcImg = ImageIO.read(new File("spaceship.png"));
 		}
 		
 		catch (Exception e)
@@ -101,13 +101,10 @@ public class Spaceship extends JPanel
 	{
 		return h;
 	}
-@Override
-	public void paintComponent(Graphics g)
-	{
-		
-		Graphics2D g2d = (Graphics2D) g;
 
-        g2d.drawImage(img, (int)x, 
+	public void drawShip(Graphics arg)
+	{
+        arg.drawImage(img, (int)x, 
             (int)y, this);
 	}
 	
