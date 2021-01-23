@@ -10,9 +10,19 @@ public class HackProject extends JPanel {
      *
      */
 	
-	private ActiveObject ticker;
+	private static ActiveObject ticker;
     private static final long serialVersionUID = 1L;
 
+
+
+
+    public HackProject() 
+    {
+        ticker = new ActiveObject(this, 5);
+        addKeyListener(new Key());
+        setFocusable(true);
+            
+    }
     Asteroid test = new Asteroid();
     public static void main(String[] args) {
         JFrame frame = new JFrame("HackProject");
@@ -24,7 +34,7 @@ public class HackProject extends JPanel {
         frame.add(driver); 
                   
         
-        ticker = new ActiveObject(this, 5);
+        
         	//test
         
     }
