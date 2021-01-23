@@ -69,7 +69,7 @@ public class HackProject extends JPanel {
    //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
   public void tick()
    {
-     test.glide();
+     test.glide(test);
    }
    
   public void keyPressed(KeyEvent e)
