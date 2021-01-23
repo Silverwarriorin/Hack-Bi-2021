@@ -54,7 +54,7 @@ public class HackProject extends JPanel {
 
        Asteroid test = new Asteroid();
        test.spawn(g);
-       test.glide(5, 5);
+       test.glide(test);
        
    }
     

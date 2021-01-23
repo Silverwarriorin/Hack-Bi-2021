@@ -1,24 +1,21 @@
 import javax.swing.*;
-
 import java.awt.*;
-import java.awt.event.*;
 
 public class Asteroid extends JPanel{
 
-    private Timer t;
+    int x = 100, y = 100;
+    double w = Math.random(), h = Math.random();
 
-    
-
-    public void glide(double x, double y)
+    public void glide(Asteroid arg)
     {
-        x += Math.random();
-        y += Math.random();
+        arg.x += Math.random();
+        arg.y += Math.random();
     }
 
     public void spawn(Graphics arg)
     {
         arg.setColor(Color.BLACK);
-        arg.fillOval(100, 100, 50, 50);
+        arg.fillOval(x, y, 50, 50);
     }
 
 }
