@@ -4,8 +4,9 @@ import java.awt.*;
 public class Asteroid extends JPanel{
 
     int x = 100, y = 100;
-    double w = Math.random(), h = Math.random();
-
+    int max = 50, min = 5;
+    int w = (int)(Math.random() * (max - min + 1) + min), h = w;
+ 
     public void glide(Asteroid arg)
     {
         arg.x += Math.random();
@@ -15,7 +16,7 @@ public class Asteroid extends JPanel{
     public void spawn(Graphics arg)
     {
         arg.setColor(Color.BLACK);
-        arg.fillOval(x, y, 50, 50);
+        arg.fillOval(x, y, w, h);
     }
 
 }
