@@ -47,14 +47,52 @@ public class Spaceship extends JPanel
 		repaint();
 	}
 	
-	public void setLocation(double cx, double cy)
+	public void setY(double cy)
+	{
+		y = cy;
+		repaint();
+	}
+
+	public void setX(double cx)
+	{
+		x = cx;
+		repaint();
+	}
+
+	public void setShipLocation(double cx, double cy)
 	{
 		x = cx;
 		y = cy;
 		repaint();
-		
 	}
 	
+	public void checkboundingbox()
+    {
+        if(ship.getShipX() > 800)
+        {
+            ship.setX(1);
+            repaint();
+        }
+
+        if(ship.getShipX() < 0)
+        {
+            ship.setX(799);
+            repaint();
+        }
+
+        if(ship.getShipY() > 800)
+        {
+            ship.setY(1);
+            repaint();
+        }
+
+        if(ship.getShipY() < 0)
+        {
+            ship.setY(799);
+            repaint();
+        }
+    }
+
 	public void rotate(double rads)
 	{
 		r = r+rads;
