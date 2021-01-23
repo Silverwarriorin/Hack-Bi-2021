@@ -51,8 +51,8 @@ public class Spaceship extends JPanel
 	{
 		x = cx;
 		y = cy;
-		
 		repaint();
+		
 	}
 	
 	public void rotate(double rads)
@@ -104,6 +104,7 @@ public class Spaceship extends JPanel
 
 	public void drawShip(Graphics arg)
 	{
+
         arg.drawImage(img, (int)x, 
             (int)y, this);
 	}

@@ -12,7 +12,8 @@ public class HackProject extends JPanel {
 	
 	private static ActiveObject ticker;
     private static final long serialVersionUID = 1L;
-
+    private Asteroid test = new Asteroid();
+    private Spaceship ship = new Spaceship();
 
 
 
@@ -23,8 +24,7 @@ public class HackProject extends JPanel {
         setFocusable(true);
             
     }
-    Asteroid test = new Asteroid();
-    Spaceship ship = new Spaceship();
+    
     public static void main(String[] args) {
         JFrame frame = new JFrame("HackProject");
         frame.setSize(800, 800);
@@ -44,23 +44,37 @@ public class HackProject extends JPanel {
     
     
     
-    private static class Key extends KeyAdapter
+    private class Key extends KeyAdapter
     { 
-      @Override
+      
       public void keyPressed(KeyEvent e)
       {
-             if(e.getKeyCode() == KeyEvent.VK_W){               
+            if(e.getKeyCode() == KeyEvent.VK_W)
+            {
+                ship.translate(0,-10);
+                repaint();                
+            }
                 
-                }
-             if(e.getKeyCode() == KeyEvent.VK_A){
-               
-               }
-              if(e.getKeyCode() == KeyEvent.VK_D){
-               
-               }
-             if(e.getKeyCode() == KeyEvent.VK_S){
-               
-               }
+
+            if(e.getKeyCode() == KeyEvent.VK_A)
+            {
+                ship.translate(-10,0);
+                repaint();
+            }
+                
+
+            if(e.getKeyCode() == KeyEvent.VK_D)
+            {
+                ship.translate(10,0);
+                repaint();
+            }
+                
+            if(e.getKeyCode() == KeyEvent.VK_S)
+            {
+                ship.translate(0,10);
+                repaint();
+            }
+                
       }
    }
    @Override
