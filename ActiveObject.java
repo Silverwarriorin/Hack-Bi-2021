@@ -63,7 +63,13 @@ class ActiveObject extends Thread implements Runnable{
 	public void run()
 	{
 		super.run();
-		cl.tick();
+		while(true)
+		{
+			cl.tick();
+			
+			pause(pauseTime);
+		}
+			
 	}
 	
 	public void start()
