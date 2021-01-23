@@ -23,8 +23,10 @@ public class HackProject extends JPanel {
         frame.add(driver);            
         
         ticker = new ActiveObject(this, 5);
-
+        	//test
+        
     }
+    
     
     
     private static class Key extends KeyAdapter
