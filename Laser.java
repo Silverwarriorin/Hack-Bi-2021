@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class Laser {
+public class Laser extends JPanel{
 	
 	private int x;
 	private int y;
