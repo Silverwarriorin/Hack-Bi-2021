@@ -58,8 +58,8 @@ public class HackProject extends JPanel {
        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
        RenderingHints.VALUE_ANTIALIAS_ON);
 
-       ship.redraw(getGraphics());
-       test.redraw(getGraphics());
+       ship.redraw(g);
+       test.redraw(g);
    }
     
    //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
@@ -101,7 +101,7 @@ public class HackProject extends JPanel {
 
   public void mouseMoved(MouseEvent e)
   {
-    shipDirection = Math.atan(e.getY()-ship.getShipY()/e.getX()-ship.getShipX());
+    shipDirection = Math.atan((e.getY()-ship.getShipY())/(e.getX()-ship.getShipX()));
     ship.setDirection(shipDirection);
     
     repaint();

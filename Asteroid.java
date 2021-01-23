@@ -16,9 +16,6 @@ public class Asteroid extends JPanel{
         size = (int)((Math.random()*3) + 1) * 15;
         x = (int)(Math.random() * (xmax - xmin + 1) + xmin);
         y = (int)(Math.random() * (ymax - ymin + 1) + ymin);
-
-
-
     }
 
     public void glide()
