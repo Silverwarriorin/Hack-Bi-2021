@@ -1,14 +1,18 @@
 import javax.swing.*;
+
 import java.awt.*;
+import java.awt.event.*;
 
 public class Asteroid extends JPanel{
 
+    private Timer t;
 
-    public void move(double x, double y)
+    
+
+    public void glide(double x, double y)
     {
-        Vector AsteroidVector = new Vector();
-
-        AsteroidVector.setVector(x, y);
+        x += Math.random();
+        y += Math.random();
     }
 
     public void spawn(Graphics arg)
