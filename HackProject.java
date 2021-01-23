@@ -20,6 +20,7 @@ public class HackProject extends JPanel {
     private Asteroid test;
     private Spaceship ship;
 
+   
 
     public HackProject() 
     {
@@ -48,14 +49,11 @@ public class HackProject extends JPanel {
                   
         
         
-            //test
-    
-            
-        
+        	//test
         
     }
     
-   
+    
    @Override
    public void paintComponent(Graphics g)
    {
@@ -63,7 +61,7 @@ public class HackProject extends JPanel {
        Graphics2D g2d = (Graphics2D) g;
        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
        RenderingHints.VALUE_ANTIALIAS_ON);
-       
+
        ship.drawShip(g);
        test.spawn(g);
    }
@@ -72,7 +70,6 @@ public class HackProject extends JPanel {
    public void tick()
    {
      test.glide(test);
-     ship.checkboundingbox();
    }
    
    public void keyPressed(KeyEvent e)
@@ -105,20 +102,7 @@ public class HackProject extends JPanel {
     }
     System.out.println(e.toString());
 
-            if(e.getKeyCode() == KeyEvent.VK_E)
-            {
-                ship.rotate(0.174533);
-                repaint();
-            }
-
-            if(e.getKeyCode() == KeyEvent.VK_Q)
-            {
-                ship.rotate(-0.174533);
-                repaint();
-            }
-            
-
-    
+    repaint();
    }
 
    public Key getKeyListener()

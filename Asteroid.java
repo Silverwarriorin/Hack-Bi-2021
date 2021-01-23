@@ -37,7 +37,7 @@ public class Asteroid extends JPanel{
     public void spawn(Graphics arg)
     {
         arg.setColor(Color.BLACK);
-        arg.fillOval(x, y, size, size);
+        arg.fillOval(200, 200, size, size);
     }
 
     
