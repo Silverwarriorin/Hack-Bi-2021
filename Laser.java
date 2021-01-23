@@ -12,12 +12,12 @@ public class Laser {
 	private double speed;
 	private int width;
 	private int height;
-	private Vector vector;
+	private Vector2D vector;
 	
 	public Laser(Spaceship player) {
 		x = player.getX();
 		y = player.getY();
-		vector = new Vector(x, y);
+		vector = new Vector2D(x, y);
 		direction = vector.getDirection();
 		speed = vector.getSpeed();
 		width = 5;
