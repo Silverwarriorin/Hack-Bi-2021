@@ -12,57 +12,57 @@ public class HackProject extends JPanel {
      *
      */
 
-    private Key klist;
-    private Mouse mlist;
-	  private static ActiveObject ticker;
-    private static final long serialVersionUID = 1L;
-    private Asteroid test;
-    private Spaceship ship;
+  private Key klist;
+  private Mouse mlist;
+  private static ActiveObject ticker;
+  private static final long serialVersionUID = 1L;
+  private Asteroid test;
+  private Spaceship ship;
 
-    private double shipSpeed = 1.5;
-    private double shipDirection = 0;
+  private double shipSpeed = 1.5;
+  private double shipDirection = 0;
 
-    public HackProject() 
-    {
-        setFocusable(true);
-        klist = new Key(this);
-        mlist = new Mouse(this);
-        test = new Asteroid(1);
-        ship = new Spaceship();
-        ship.setSpeed(20);
+  public HackProject() 
+  {
+      setBackground(Color.BLACK);
+      setFocusable(true);
+      klist = new Key(this);
+      mlist = new Mouse(this);
+      test = new Asteroid(1);
+      ship = new Spaceship();
+      ship.setSpeed(20);
+      ticker = new ActiveObject(this, 10);
 
-        ticker = new ActiveObject(this, 10);
-    }
-    
-    public static void main(String[] args) {
-        JFrame frame = new JFrame("HackProject");
-        frame.setSize(800, 800);
-        frame.setLocation(200, 100);
-        frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        frame.setVisible(true);
-        HackProject driver = new HackProject();
-        frame.add(driver); 
-        driver.paintComponent(frame.getGraphics());
-        
-        frame.addKeyListener(driver.getKeyListener());
-        frame.addMouseMotionListener(driver.getMouseListener());
-        	//test
-    }
+  }
+  
+  public static void main(String[] args) {
+      JFrame frame = new JFrame("HackProject");
+      frame.setBackground(Color.BLACK);
+      frame.setSize(800, 800);
+      frame.setLocation(200, 100);
+      frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+      frame.setVisible(true);
+      HackProject driver = new HackProject();
+      frame.add(driver); 
+      driver.paintComponent(frame.getGraphics());
+      frame.addKeyListener(driver.getKeyListener());
+      frame.addMouseMotionListener(driver.getMouseListener());
+  }
     
     
-   @Override
+  @Override
   public void paintComponent(Graphics g)
-   {
-       super.paintComponent(g);
-       Graphics2D g2d = (Graphics2D) g;
-       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-       RenderingHints.VALUE_ANTIALIAS_ON);
+  {
+      super.paintComponent(g);
+      Graphics2D g2d = (Graphics2D) g;
+      g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+      RenderingHints.VALUE_ANTIALIAS_ON);
 
-       ship.redraw(g);
-       test.redraw(g);
-   }
-    
-   //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
+      ship.redraw(g);
+      test.redraw(g);
+  }
+
+  //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
   public void tick()
    {
      test.glide();
@@ -87,7 +87,7 @@ public class HackProject extends JPanel {
     if(e.getKeyCode() == KeyEvent.VK_W)
     {
         ship.setVector(shipSpeed, shipDirection);
-        repaint();  
+        //repaint();  
     }
     
   }
@@ -97,7 +97,7 @@ public class HackProject extends JPanel {
     if(e.getKeyCode() == KeyEvent.VK_W)
     {
         ship.setSpeed(0);
-        repaint();  
+        //repaint();  
     }
   }
 

@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
-public class Laser {
+public class Laser extends JPanel{
 	
 	private int x;
 	private int y;
@@ -63,9 +63,7 @@ public class Laser {
 	public double getDirection() {
 		return vector.getDirection();
 	}
-	
-	
-	
+
 	public boolean edgeCollision (int rightEdge, int bottomEdge) {
 		if (x < 0) {
 			return true;
