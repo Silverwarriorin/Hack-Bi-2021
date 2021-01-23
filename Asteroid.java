@@ -1,17 +1,28 @@
 import javax.swing.*;
+
+
 import java.awt.*;
+
 
 public class Asteroid extends JPanel{
 
-    private static final long serialVersionUID = 1L;
-    
-    // setting bounds for spawning max = 700 min = 50
-    int xmax = 700, xmin = 50;
-    int x = (int)(Math.random() * (xmax - xmin + 1) + xmin), y = (int)(Math.random() * (xmax - xmin + 1) + xmin);
-    
-    //setting bounds for size max = 50 min = 15
-    int max = 50, min = 15;
-    int w = (int)(Math.random() * (max - min + 1) + min), h = w;
+    private int size;
+
+    public Asteroid()
+    {
+        switch((int)(Math.random()*3))
+        {
+            case 0 : size = 50;
+            case 1 : size = 25;
+            case 2 : size = 10;
+        }
+
+    }
+
+    //setting bounds for spawning x: -100 - 0 && 800 - 900 y: -100 - 0 && 800 - 900
+    int xmax = 0, xmin = -100, ymax = 900, ymin = 800;
+    int x = (int)(Math.random() * (xmax - xmin + 1) + xmin), y = (int)(Math.random() * (ymax - ymin + 1) + ymin);
+
  
     //I have no clue how to make this work
     public void glide(Asteroid arg)
@@ -22,12 +33,16 @@ public class Asteroid extends JPanel{
         repaint();
     }
 
+    
+
     //spawn method
     public void spawn(Graphics arg)
     {
         arg.setColor(Color.BLACK);
-        arg.fillOval(x, y, w, h);
+        arg.fillOval(x, y, size, size);
     }
+
+    
 
 }
 
