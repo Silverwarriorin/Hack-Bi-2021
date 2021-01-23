@@ -91,11 +91,11 @@ public class Spaceship extends JPanel
 		repaint();
 	}
 	
-	public double getX() {
+	public double getShipX() {
 		return x;
 	}
 	
-	public double getY() {
+	public double getShipY() {
 		return y;
 	}
 	
@@ -103,6 +103,8 @@ public class Spaceship extends JPanel
 	{
 		return w;
 	}
+
+
 	
 
 	public double getShipHeight()
