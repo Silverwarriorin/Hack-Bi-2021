@@ -19,7 +19,8 @@ public class HackProject extends JPanel
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
         HackProject driver = new HackProject();
-        frame.add(driver);                   
+        frame.add(driver);            
+        
     }
     
     
@@ -48,7 +49,15 @@ public class HackProject extends JPanel
        Graphics2D g2d = (Graphics2D) g;
        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
        RenderingHints.VALUE_ANTIALIAS_ON);
+
        
+   }
+
+   public void spawnAsteroid(Graphics g)
+   {
+     Asteroid Ast = new Asteroid();
+     Ast.spawn(g);
+     //Ast.move(20, 20);
    }
     
     //testing push

@@ -1,24 +1,20 @@
-import javax.swing.JPanel;
-import javax.swing.*;
+
 import java.awt.*;
 
-public class Asteroid extends JPanel {
+public class Asteroid{
 
-    private double size;
 
-    public void paint(Graphics g)
+    /*public void move(double x, double y)
     {
-        g.fillOval(100, 100, 100, 100);
-    }
-    public Asteroid()
-    {
-        
-    }
-    
-     public void SpawnAsteroid(double size)
-     {
-        
-     }
+        Vector AsteroidVector = new Vector();
 
+        AsteroidVector.setVector(x, y);
+    }*/
+
+    public void spawn(Graphics arg)
+    {
+        arg.setColor(Color.BLACK);
+        arg.fillOval(100, 100, 100, 100);
+    }
 
 }
