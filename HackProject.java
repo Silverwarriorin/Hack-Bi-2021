@@ -21,6 +21,8 @@ public class HackProject extends JPanel
         HackProject driver = new HackProject();
         frame.add(driver);            
         
+        
+
     }
     
     
@@ -50,14 +52,9 @@ public class HackProject extends JPanel
        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
        RenderingHints.VALUE_ANTIALIAS_ON);
 
+       Asteroid test = new Asteroid();
+       test.spawn(g);
        
-   }
-
-   public void spawnAsteroid(Graphics g)
-   {
-     Asteroid Ast = new Asteroid();
-     Ast.spawn(g);
-     //Ast.move(20, 20);
    }
     
     //testing push
