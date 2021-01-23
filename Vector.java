@@ -24,12 +24,12 @@ public class Vector
     
     public double getSpeed()
     {
-    	
+    	return y/Math.sin(Math.atan(y/x));
     }
     
     public double getDirection()
     {
-    	
+    	return Math.atan(y/x);
     }
     
     public double getX()
@@ -45,6 +45,11 @@ public class Vector
     public Vector clone
     {
     	return new Vector(x,y);
+    }
+    
+    public String toString()
+    {
+    	return "y: " + x + " y: " + y + " speed: " + getSpeed() + " direction: " + Math.toDegrees(getDirection());
     }
 
 }
