@@ -1,19 +1,19 @@
 
 
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
 public class Spaceship extends JPanel
 {
-    private double x, y, w, h;
+    private double x, y, w, h, r;
 	private Vector v;
+	private BufferedImage srcImg;
 	private BufferedImage img;
 	
 	public Spaceship()
@@ -25,7 +25,7 @@ public class Spaceship extends JPanel
 	{
 		try
 		{
-			img = ImageIO.read(new File("E:\\gitshit\\Hack-Bi-2021\\spaceship.png"));
+			srcImg = ImageIO.read(new File("\\spaceship.png"));
 		}
 		
 		catch (Exception e)
@@ -33,6 +33,7 @@ public class Spaceship extends JPanel
 			System.out.println(e.toString() + e.getStackTrace());
 		}
 		
+		img = srcImg;
 		
 		w = img.getWidth(null);
 		h = img.getHeight(null);
@@ -51,6 +52,24 @@ public class Spaceship extends JPanel
 		x = cx;
 		y = cy;
 		
+		repaint();
+	}
+	
+	public void rotate(double rads)
+	{
+		r = r+rads;
+		final double sin = Math.abs(Math.sin(rads));
+		final double cos = Math.abs(Math.cos(rads));
+		final int w = (int) Math.floor(img.getWidth() * cos + srcImg.getHeight() * sin);
+		final int h = (int) Math.floor(img.getHeight() * cos + srcImg.getWidth() * sin);
+		final BufferedImage rotatedImage = new BufferedImage(w, h, srcImg.getType());
+		final AffineTransform at = new AffineTransform();
+		at.translate(w / 2, h / 2);
+		at.rotate(rads,0, 0);
+		at.translate(-srcImg.getWidth() / 2, -srcImg.getHeight() / 2);
+		final AffineTransformOp rotateOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+		rotateOp.filter(srcImg,rotatedImage);
+		img = rotatedImage;
 		repaint();
 	}
 	
@@ -92,7 +111,6 @@ public class Spaceship extends JPanel
             (int)y, this);
 	}
 	
-	
 	public static void main(String[] args)
 	{
 		Spaceship panel = new Spaceship();
@@ -107,11 +125,9 @@ public class Spaceship extends JPanel
 	       panel.paintComponent(frame.getGraphics());
 	       
 	       panel.translate(100, 100);
+	       
+	       panel.rotate(Math.toRadians(180));
 	        
 	}
-	
-
-
-
 }
 
