@@ -13,7 +13,7 @@ public class HackProject extends JPanel {
   
      
     private Key klist;
-	  private static ActiveObject ticker;
+	private static ActiveObject ticker;
     private static final long serialVersionUID = 1L;
     private Asteroid test = new Asteroid();
     private Spaceship ship = new Spaceship();
@@ -24,6 +24,7 @@ public class HackProject extends JPanel {
         ticker = new ActiveObject(this, 5);
         setFocusable(true);
         klist = new Key(this);
+        ship.setShipLocation(400, 400);
     }
     
     public static void main(String[] args) {
@@ -40,11 +41,14 @@ public class HackProject extends JPanel {
                   
         
         
-        	//test
+            //test
+    
+            
+        
         
     }
     
-    
+   
    @Override
    public void paintComponent(Graphics g)
    {
@@ -52,7 +56,7 @@ public class HackProject extends JPanel {
        Graphics2D g2d = (Graphics2D) g;
        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
        RenderingHints.VALUE_ANTIALIAS_ON);
-
+       
        ship.drawShip(g);
        test.spawn(g);
        
@@ -63,6 +67,7 @@ public class HackProject extends JPanel {
    public void tick()
    {
      test.glide(test);
+     ship.checkboundingbox();
    }
     //testing push
 
@@ -94,9 +99,21 @@ public class HackProject extends JPanel {
                 ship.translate(0,10);
                 repaint();
             }
-            System.out.println(e.toString());
 
-    repaint();
+            if(e.getKeyCode() == KeyEvent.VK_E)
+            {
+                ship.rotate(0.174533);
+                repaint();
+            }
+
+            if(e.getKeyCode() == KeyEvent.VK_Q)
+            {
+                ship.rotate(-0.174533);
+                repaint();
+            }
+            
+
+    
    }
 
    public Key getKeyListener()
