@@ -53,10 +53,10 @@ public class Vector2D
     	x = Math.cos(radians)*getSpeed();
     	y = Math.sin(radians)*getSpeed();
     }
-    
-    public Vector2D clone()
+    @Override
+    public Vector2D clone() throws CloneNotSupportedException
     {
-    	return new Vector2D(x,y);
+        return new Vector2D(x, y);
     }
     
     public String toString()
