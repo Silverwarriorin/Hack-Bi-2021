@@ -63,9 +63,7 @@ public class Laser extends JPanel{
 	public double getDirection() {
 		return vector.getDirection();
 	}
-	
-	
-	
+
 	public boolean edgeCollision (int rightEdge, int bottomEdge) {
 		if (x < 0) {
 			return true;

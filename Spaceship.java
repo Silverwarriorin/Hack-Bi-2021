@@ -79,25 +79,21 @@ public class Spaceship extends JPanel
         if(getShipX() > 800)
         {
             setX(1);
-            repaint();
         }
 
         if(getShipX() < 0)
         {
             setX(799);
-            repaint();
         }
 
         if(getShipY() > 800)
         {
             setY(1);
-            repaint();
         }
 
         if(getShipY() < 0)
         {
             setY(799);
-            repaint();
         }
     }
 
