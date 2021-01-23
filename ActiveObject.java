@@ -14,6 +14,7 @@ public class ActiveObject extends Thread
         this.pauseTime = pauseTime;
         
         cl = client;
+        start();
     }
     
     public void setPauseTime(double x)
