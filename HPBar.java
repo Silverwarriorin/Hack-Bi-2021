@@ -6,18 +6,20 @@ public class HPBar {
 
 	private int x;
 	private int y;
-	private int redRectWidth;
+	private int rectWidth;
 	private int height;
+	private Color color;
 	
 	public HPBar (Spaceship player) {
 		x = (int) player.getShipX();
 		y = (int) player.getShipY();
-		redRectWidth = (int) player.getShipWidth();
+		rectWidth = (int) player.getShipWidth();
 		height = 15;
+		color = Color.green;
 	}
 	
-	public int determineFraction (Spaceship player) {
-		return player.getCurrentHP() / player.getMaxHP();
+	public void deadBoi() {
+		color = Color.red;
 	}
 	
 	public void draw(Graphics g, Spaceship player) {
@@ -26,11 +28,8 @@ public class HPBar {
 		x = (int) player.getShipX();
 		y = (int) player.getShipY();
 		
-		g2d.setColor(Color.red);
 		// centers the hp bar underneath the ship if it works correctly
-		g2d.fillRect(x - redRectWidth/2, y + (int) (player.getShipHeight()/2), redRectWidth, height);
-		g2d.setColor(Color.green);
-		// makes a second green rectangle to show how much hp is lost
-		g2d.fillRect(x - redRectWidth/2, y + (int) (player.getShipHeight()/2), determineFraction(player) * redRectWidth, height);
+		g2d.setColor(color);
+		g2d.fillRect(x - rectWidth/2, y + (int) (player.getShipHeight()/2), rectWidth, height);
 	}
 }
