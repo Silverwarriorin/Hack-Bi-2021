@@ -15,6 +15,7 @@ public class Spaceship extends JPanel
 	private Vector2D v;
 	private BufferedImage srcImg;
 	private BufferedImage img;
+
 	
 	public Spaceship()
 	{
@@ -105,8 +106,6 @@ public class Spaceship extends JPanel
 	}
 
 
-	
-
 	public double getShipHeight()
 	{
 		return h;
@@ -118,6 +117,7 @@ public class Spaceship extends JPanel
         arg.drawImage(img, (int)x, 
             (int)y, this);
 	}
+
 	
 /*	public static void main(String[] args)
 	{
