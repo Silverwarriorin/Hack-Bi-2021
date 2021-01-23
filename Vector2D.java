@@ -16,7 +16,7 @@ public class Vector2D
     	y = Math.sin(radians)*speed;
     }
     
-    public Vector(double x, double y)
+    public Vector2D(double x, double y)
     {
     	this.x=x;
     	this.y=y;
@@ -54,9 +54,9 @@ public class Vector2D
     	y = Math.sin(radians)*getSpeed();
     }
     
-    public Vector clone()
+    public Vector2D clone()
     {
-    	return new Vector(x,y);
+    	return new Vector2D(x,y);
     }
     
     public String toString()
