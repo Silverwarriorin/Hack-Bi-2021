@@ -1,27 +1,25 @@
 import javax.swing.*;
-
-
 import java.awt.*;
 
 
 public class Asteroid extends JPanel{
 
-    private int size;
+    private static final long serialVersionUID = 1L;
+    private int size, x, y;
+    
+    //setting bounds for spawning x: -100 - 0 && 800 - 900 y: -100 - 0 && 800 - 900
+    private int xmax = 0, xmin = -100, ymax = 900, ymin = 800;
 
     public Asteroid()
     {
-        switch((int)(Math.random()*3))
-        {
-            case 0 : size = 50;
-            case 1 : size = 25;
-            case 2 : size = 10;
-        }
+        size = (int)((Math.random()*3) + 1) * 15;
+        x = (int)(Math.random() * (xmax - xmin + 1) + xmin);
+        y = (int)(Math.random() * (ymax - ymin + 1) + ymin);
 
     }
 
-    //setting bounds for spawning x: -100 - 0 && 800 - 900 y: -100 - 0 && 800 - 900
-    int xmax = 0, xmin = -100, ymax = 900, ymin = 800;
-    int x = (int)(Math.random() * (xmax - xmin + 1) + xmin), y = (int)(Math.random() * (ymax - ymin + 1) + ymin);
+    
+    
 
  
     //I have no clue how to make this work
