@@ -1,17 +1,19 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
 public class Asteroid extends JPanel{
 
     int xmax = 700, xmin = 50;
     int x = (int)(Math.random() * (xmax - xmin + 1) + xmin), y = (int)(Math.random() * (xmax - xmin + 1) + xmin);
+    
     int max = 50, min = 15;
     int w = (int)(Math.random() * (max - min + 1) + min), h = w;
  
     public void glide(Asteroid arg)
     {
-        arg.x += Math.random();
-        arg.y += Math.random();
+        arg.x += (int)(Math.random() * (10) + 1);
+        arg.y += (int)(Math.random() * (10) + 1);
     }
 
     public void spawn(Graphics arg)
@@ -21,3 +23,4 @@ public class Asteroid extends JPanel{
     }
 
 }
+
