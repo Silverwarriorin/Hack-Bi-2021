@@ -1,7 +1,5 @@
 import javax.swing.*;
 
-import HackProjectDevelopmentSpace.Asteroid;
-
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -10,11 +8,7 @@ public class Asteroid extends JPanel{
 
     private static final long serialVersionUID = 1L;
     private double size, x, y, speed;
-<<<<<<< HEAD
-=======
     private ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
-
->>>>>>> 80001b8fb6af389d484b3bfa32d982984fcb1b25
     
     //setting bounds for spawning x: -100 - 0 && 800 - 900 y: -100 - 0 && 800 - 900
     private int xmax = 0, xmin = -100, ymax = 900, ymin = 800;
