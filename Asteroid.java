@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
 public class Asteroid extends JPanel{
 
-    //setting bounds for spawning max = 700 min = 50
+    private static final long serialVersionUID = 1L;
+    
+    // setting bounds for spawning max = 700 min = 50
     int xmax = 700, xmin = 50;
     int x = (int)(Math.random() * (xmax - xmin + 1) + xmin), y = (int)(Math.random() * (xmax - xmin + 1) + xmin);
     
