@@ -1,6 +1,4 @@
 import javax.swing.*;
-
-
 import java.awt.*;
 
 
@@ -8,8 +6,10 @@ public class Asteroid extends JPanel{
 
     private static final long serialVersionUID = 1L;
     private int size, x, y;
-    private int xmax = 0, xmin = -100, ymax = 900, ymin = 800;
     
+    //setting bounds for spawning x: -100 - 0 && 800 - 900 y: -100 - 0 && 800 - 900
+    private int xmax = 0, xmin = -100, ymax = 900, ymin = 800;
+
     public Asteroid()
     {
         size = (int)((Math.random()*3) + 1) * 15;
@@ -18,8 +18,8 @@ public class Asteroid extends JPanel{
 
     }
 
-    //setting bounds for spawning x: -100 - 0 && 800 - 900 y: -100 - 0 && 800 - 900
-    int xmax = 0, xmin = -100, ymax = 900, ymin = 800;
+    
+    
 
  
     //I have no clue how to make this work
