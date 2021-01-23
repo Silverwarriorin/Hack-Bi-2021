@@ -18,21 +18,15 @@ public class Asteroid extends JPanel{
 
     }
 
-    public void translate(double dx, double dy)
-	{
-		x+=dx;
-		y+=dy;
-		
-		repaint();
-	}
+    
     
 
  
     //I have no clue how to make this work
-    public void glide(Asteroid arg)
+    public void glide()
     {
-        arg.x += (int)(Math.random() * 10);
-        arg.y += (int)(Math.random() * 10);
+        x += (int)(Math.random() * 10);
+        y += (int)(Math.random() * 10);
 
         repaint();
     }
