@@ -10,20 +10,20 @@ public class HackProject extends JPanel {
     /**
      *
      */
-	
-	private static ActiveObject ticker;
+  
+     
+    private Key klist;
+	  private static ActiveObject ticker;
     private static final long serialVersionUID = 1L;
     private Asteroid test = new Asteroid();
     private Spaceship ship = new Spaceship();
 
 
-
     public HackProject() 
     {
         ticker = new ActiveObject(this, 5);
-        addKeyListener(new Key());
         setFocusable(true);
-            
+        klist = new Key(this);
     }
     
     public static void main(String[] args) {
@@ -36,6 +36,7 @@ public class HackProject extends JPanel {
         frame.add(driver); 
         driver.paintComponent(frame.getGraphics());
         
+        frame.addKeyListener(driver.getKeyListener());
                   
         
         
@@ -44,13 +45,32 @@ public class HackProject extends JPanel {
     }
     
     
+   @Override
+   public void paintComponent(Graphics g)
+   {
+       super.paintComponent(g);
+       Graphics2D g2d = (Graphics2D) g;
+       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+       RenderingHints.VALUE_ANTIALIAS_ON);
+
+       ship.drawShip(g);
+       test.spawn(g);
+       
+       
+   }
     
-    class Key implements KeyListener
-    { 
-      
-      public void keyPressed(KeyEvent e)
-      {
-            if(e.getKeyCode() == KeyEvent.VK_W)
+   //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
+   public void tick()
+   {
+     test.glide(test);
+   }
+    //testing push
+
+  
+   public void keyPressed(KeyEvent e)
+   {
+
+    if(e.getKeyCode() == KeyEvent.VK_W)
             {
                 ship.translate(0,-10);
                 repaint();  
@@ -75,6 +95,29 @@ public class HackProject extends JPanel {
                 repaint();
             }
             System.out.println(e.toString());
+
+    repaint();
+   }
+
+   public Key getKeyListener()
+   {
+     return klist;
+   }
+}
+
+class Key implements KeyListener
+    { 
+      
+      HackProject cl;
+
+      public Key(HackProject driver)
+      {
+        cl = driver;
+      }
+
+      public void keyPressed(KeyEvent e)
+      {
+            cl.keyPressed(e); 
       }
 
       public void keyTyped(KeyEvent e)
@@ -87,27 +130,3 @@ public class HackProject extends JPanel {
         
       }
    }
-   @Override
-   public void paintComponent(Graphics g)
-   {
-       super.paintComponent(g);
-       Graphics2D g2d = (Graphics2D) g;
-       g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-       RenderingHints.VALUE_ANTIALIAS_ON);
-
-       ship.drawShip(g);
-       test.spawn(g);
-       
-       
-   }
-    
-   //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
-   public void tick()
-   {
-     test.glide(test);
-   }
-    //testing push
-
-
-
-}
