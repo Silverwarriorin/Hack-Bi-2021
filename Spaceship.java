@@ -91,6 +91,14 @@ public class Spaceship extends JPanel
 		repaint();
 	}
 	
+	public double getX() {
+		return x;
+	}
+	
+	public double getY() {
+		return y;
+	}
+	
 	public double getShipWidth()
 	{
 		return w;
