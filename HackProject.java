@@ -3,6 +3,7 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import java.awt.*;
 import javax.swing.JFrame;
 import java.awt.event.*;
+import java.awt.event.KeyListener;
 
 public class HackProject extends JPanel {
 
@@ -44,7 +45,7 @@ public class HackProject extends JPanel {
     
     
     
-    private class Key extends KeyAdapter
+    class Key implements KeyListener
     { 
       
       public void keyPressed(KeyEvent e)
@@ -52,10 +53,9 @@ public class HackProject extends JPanel {
             if(e.getKeyCode() == KeyEvent.VK_W)
             {
                 ship.translate(0,-10);
-                repaint();                
+                repaint();  
             }
                 
-
             if(e.getKeyCode() == KeyEvent.VK_A)
             {
                 ship.translate(-10,0);
@@ -74,7 +74,17 @@ public class HackProject extends JPanel {
                 ship.translate(0,10);
                 repaint();
             }
-                
+            System.out.println(e.toString());
+      }
+
+      public void keyTyped(KeyEvent e)
+      {
+
+      }
+
+      public void keyReleased(KeyEvent e)
+      {
+        
       }
    }
    @Override
