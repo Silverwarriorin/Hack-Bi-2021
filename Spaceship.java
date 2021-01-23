@@ -12,7 +12,7 @@ import javax.swing.*;
 public class Spaceship extends JPanel
 {
     private double x, y, w, h, r;
-	private Vector v;
+	private Vector2D v;
 	private BufferedImage srcImg;
 	private BufferedImage img;
 	
@@ -25,7 +25,7 @@ public class Spaceship extends JPanel
 	{
 		try
 		{
-			srcImg = ImageIO.read(new File("\\spaceship.png"));
+			srcImg = ImageIO.read(new File("E:\\gitshit\\Hack-Bi-2021\\spaceship.png"));
 		}
 		
 		catch (Exception e)
