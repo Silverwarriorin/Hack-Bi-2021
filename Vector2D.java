@@ -1,11 +1,11 @@
 
 
 
-public class Vector
+public class Vector2D
 {
     double x, y;
     
-    public Vector()
+    public Vector2D()
     {
     	
     }
@@ -42,7 +42,19 @@ public class Vector
     	return y;
     }
     
-    public Vector clone
+    public void setSpeed(double s)
+    {
+    	x = Math.cos(getDirection())*s;
+    	y = Math.sin(getDirection())*s;
+    }
+    
+    public void setDirection(double radians)
+    {
+    	x = Math.cos(radians)*getSpeed();
+    	y = Math.sin(radians)*getSpeed();
+    }
+    
+    public Vector clone()
     {
     	return new Vector(x,y);
     }
