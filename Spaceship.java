@@ -101,7 +101,7 @@ public class Spaceship extends JPanel
 
 	public void setSpeed(double s)
 	{
-		v.setSpeed(s);
+		v.setVector(s, r);
 	}
 	
 	public void setDirection(double rads)

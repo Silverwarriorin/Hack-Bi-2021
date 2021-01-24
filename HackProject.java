@@ -115,7 +115,7 @@ public class HackProject extends JPanel {
   {
     if(e.getKeyCode() == KeyEvent.VK_W)
     {
-        ship.setVector(shipSpeed, shipDirection);
+        ship.setSpeed(2);
     }
   }
 
@@ -123,7 +123,7 @@ public class HackProject extends JPanel {
   {
     if(e.getKeyCode() == KeyEvent.VK_W)
     {
-        ship.setSpeed(0);
+        ship.setShipLocation(ship.getShipX(),ship.getShipY());
     }
   }
 
