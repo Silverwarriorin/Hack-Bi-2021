@@ -30,6 +30,7 @@ public class HackProject extends JPanel {
     driver.paintComponent(frame.getGraphics());
     frame.addKeyListener(driver.getKeyListener());
     frame.addMouseMotionListener(driver.getMouseListener());
+    frame.addMouseListener(driver.getMouseListener());
     frame.validate();
 }
 
