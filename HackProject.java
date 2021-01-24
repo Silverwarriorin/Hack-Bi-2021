@@ -59,7 +59,8 @@ public class HackProject extends JPanel {
       RenderingHints.VALUE_ANTIALIAS_ON);
 
       ship.redraw(g);
-      test.redraw(g);
+      for(Asteroid a : asteroids)
+        a.redraw(g);
   }
 
   //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
@@ -75,9 +76,6 @@ public class HackProject extends JPanel {
         ;//ENDROUND
      // if(bounds)
     }
-        
-
-    
 
      repaint(); 
    }
@@ -87,7 +85,6 @@ public class HackProject extends JPanel {
     if(e.getKeyCode() == KeyEvent.VK_W)
     {
         ship.setVector(shipSpeed, shipDirection);
-       
     }
   }
 
@@ -96,7 +93,6 @@ public class HackProject extends JPanel {
     if(e.getKeyCode() == KeyEvent.VK_W)
     {
         ship.setSpeed(0);
-        
     }
   }
 
@@ -115,7 +111,6 @@ public class HackProject extends JPanel {
     shipDirection = Math.atan((e.getY()-ship.getShipY())/((double)e.getX()-ship.getShipX()));
     
     ship.setDirection(shipDirection);
-    //repaint();
   }
 
   public void mouseClicked(MouseEvent e)
