@@ -59,8 +59,19 @@ public class Asteroid extends JPanel{
     {
         x += Math.random() * (speed);
         y += Math.random() * (speed);
+
+        if(this.myX() >= 800)
+            setX(1);
+
+        if(this.myY() >= 800)
+            setY(1);
+        
+        if(this.myX() <= 0)
+            setX(799);
+
+        if(this.myY() <= 0)
+            setY(799);
     }
-    
     public void redraw(Graphics g)
     {
         g.setColor(Color.BLACK);
@@ -88,6 +99,10 @@ public class Asteroid extends JPanel{
 		x = cx;
 
 	}
+
+
+
+    
 
     
 

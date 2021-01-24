@@ -3,7 +3,6 @@
 
 import java.awt.*;
 import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -17,15 +16,13 @@ public class Spaceship extends JPanel
 	private BufferedImage srcImg;
 	private BufferedImage img;
 	private ArrayList<Laser> lasers;
+	private AffineTransform at;
 	
 	public Spaceship()
 	{
-
 		loadImage();
 		v = new Vector2D();
 		lasers = new ArrayList<Laser>();
-
-
 	}
 	
 	private void loadImage()
@@ -115,15 +112,13 @@ public class Spaceship extends JPanel
 		v.setDirection(rads);
 		final double sin = Math.abs(Math.sin(rads));
 		final double cos = Math.abs(Math.cos(rads));
-		final double width = Math.max(1, Math.floor(img.getWidth() * cos + img.getHeight() * sin));
-		final double height = Math.max(1, Math.floor(img.getHeight() * cos + img.getWidth() * sin));
-		final BufferedImage rotatedImage = new BufferedImage((int)width, (int)height, srcImg.getType());
-		final AffineTransform at = new AffineTransform();
-		at.translate(width / 2, height / 2);
+		final double width = Math.floor(img.getWidth() * cos + img.getHeight() * sin);
+		final double height = Math.floor(img.getHeight() * cos + img.getWidth() * sin);
+		final BufferedImage rotatedImage = new BufferedImage( (int)width, (int)height, srcImg.getType());
+		at = new AffineTransform();
+		at.translate(x + (width / 2), y + (height / 2));
 		at.rotate(rads,x,y);
 		at.translate(-img.getWidth() / 2, -img.getHeight() / 2);
-		final AffineTransformOp rotateOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-		rotateOp.filter(srcImg,rotatedImage);
 		img = rotatedImage;
 	}
 	
@@ -153,8 +148,8 @@ public class Spaceship extends JPanel
 
 	public void redraw(Graphics g)
 	{
-        g.drawImage(img, (int)x, 
-            (int)y, this);
+		Graphics2D g2d = (Graphics2D) g;
+        g2d.drawImage(img, at, this);
 	}
 
 	public double getDirection()
