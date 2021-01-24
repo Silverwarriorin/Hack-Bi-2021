@@ -11,7 +11,6 @@ public class HackProject extends JPanel {
   private Mouse mlist;
   private static ActiveObject ticker;
   private static final long serialVersionUID = 1L;
-  private Asteroid test;
   private Spaceship ship;
   private Timer timer;
   private static final double shipSpeed = 1.5;
@@ -73,18 +72,28 @@ public class HackProject extends JPanel {
     {
       asteroids.get(k).drive();
 
-      if(ship.getBoundingBox().contains(asteroids.get(k).getBoundingBox())>=0)
+      //if the asteroid is inside the panel, check its 
+      if (asteroids.get(k).isActive())
       {
-        //round over
-        System.out.println("Round Over");
-        asteroids.remove(k);
-        k--;
-      }
-      
-      else if (asteroids.get(k).isActive())
-      {
-        boolean deleted = false;
-        for(int j = 0; j<lasers.size(); j++)
+        
+        if(bounds.contains(asteroids.get(k).getBoundingBox())<0)
+        {
+          asteroids.remove(k);
+          p();
+          k--;
+        }  
+
+        //if the ship contains the asteroid, end the round;
+        else if(ship.getBoundingBox().contains(asteroids.get(k).getBoundingBox())>=0)
+        {
+          //round over
+          System.out.println("Round Over");
+          asteroids.remove(k);
+          k--;
+        }
+
+        //if the asteroid contains a laser, remove it and the laser
+        else for(int j = 0; j<lasers.size(); j++)
           if(asteroids.get(k).getBoundingBox().contains(lasers.get(j).getHead().x, lasers.get(j).getHead().y))
           {
             asteroids.remove(k);
@@ -92,17 +101,10 @@ public class HackProject extends JPanel {
             lasers.remove(j);
             j--;
             System.out.println("Asteroid and Laser Removed");
-            deleted = true;
           }
-        
-        if(bounds.contains(asteroids.get(k).getBoundingBox())<0 && !deleted)
-        {
-          asteroids.remove(k);
-          System.out.println("removed ast");
-          k--;
-        }  
       }
 
+      //If the entire asteroid is inside the frame, activate it
       else
       {
         boolean allIn = true;
@@ -110,11 +112,14 @@ public class HackProject extends JPanel {
           if (!bounds.contains(pt.x, pt.y))
            allIn = false;
         if(allIn)
+        {
           asteroids.get(k).activate();
+          p();
+        }
       }
-
     }
 
+    //if the laser leave the frame, remove it
     for(int j = 0; j < lasers.size(); j++)
     {
       if(!bounds.contains(lasers.get(j).getHead().x, lasers.get(j).getHead().y))
@@ -132,7 +137,12 @@ public class HackProject extends JPanel {
     }
      repaint(); 
   }
-   
+  int ct;
+  void p()
+  {
+    System.out.println(++ct);
+  }
+
   public void keyPressed(KeyEvent e)
   {
     if(e.getKeyCode() == KeyEvent.VK_W)
