@@ -142,10 +142,7 @@ public class HackProject extends JPanel {
     //n seconds interval
     if (timer.getTimeElapsed()>.25)
     {
-      for (int i = 0; i < 4; i++)
-        asteroids.add(new Asteroid(1.5, ship));
-
-      asteroids.add(new Asteroid(1.5));
+      asteroids.add(new Asteroid(1.5, ship));
       timer.reset();
     }
 

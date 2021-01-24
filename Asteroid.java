@@ -16,7 +16,7 @@ public class Asteroid extends JPanel{
     private Vector2D vect;
     private BufferedImage img;
 
-    public Asteroid(double speed, Spaceship player)
+    public Asteroid(double speed, Spaceship ship)
     {
 
         size = (int)((Math.random()*3) + 1) * 15;
@@ -96,12 +96,13 @@ public class Asteroid extends JPanel{
             break;
         }
 
-        newDirection(speed, player.getDirection());
+        
 
         x = (int)(Math.random() * (xmax - xmin)) + xmin;
         y = (int)(Math.random() * (ymax - ymin)) + ymin;
 
         bounds = new BoundingBox(x, y, size, size);
+        Math.atan2((y-(ship.getShipY()+(ship.getShipHeight()/2))), (x-(ship.getShipX()+(ship.getShipWidth()/2))));
     }
 
     public void drive()
