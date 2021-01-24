@@ -8,6 +8,8 @@ public class Asteroid extends JPanel{
     //setting bounds for spawning x: -100 - 0 && 800 - 900 y: -100 - 0 && 800 - 900
     private int xmax = 0, xmin = -100, ymax = 900, ymin = 800;
 
+    private BoundingBox bounds;
+
     public Asteroid(double speed)
     {
         this.speed = speed;
@@ -15,20 +17,23 @@ public class Asteroid extends JPanel{
         x = (int)(Math.random() * (xmax - xmin)) + xmin;
         y = (int)(Math.random() * (ymax - ymin)) + ymin;
 
-        x = 200;
-        y = 200;
+        bounds = new BoundingBox(x, y, size, size);
     }
 
     public void glide()
     {
-        x += Math.random() * (speed);
-        y += Math.random() * (speed);
+        double dx = Math.random() * (speed);
+        double dy = Math.random() * (speed);
+        x+=dx;
+        y+=dy;
+        bounds.translate(dx, dy);
     }
 
     public void redraw(Graphics g)
     {
         g.setColor(Color.WHITE);
         g.fillOval((int)x, (int)y, (int)size, (int)size);
+
     }
 
     public double myX()
@@ -51,7 +56,12 @@ public class Asteroid extends JPanel{
 	{
 		x = cx;
 
-	}
+    }
+    
+    public BoundingBox getBoundingBox()
+    {
+        return bounds;
+    }
 
     
 

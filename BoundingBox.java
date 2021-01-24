@@ -35,18 +35,11 @@ public class BoundingBox {
             };
     }
 
-    public void rotate(double rads)
+    public void translate(double dx, double dy)
     {
-        double cos = Math.cos(rads);
-        double sin = Math.sin(rads);
-
-        Point[] pts = getPoints();
-
-
-        for (int k = 0; k < 2; k++)
-        {
-
-        }
+       box.translate((int)dx, (int)dy);
     }
+
+
     
 }

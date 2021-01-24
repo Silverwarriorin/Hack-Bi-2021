@@ -1,6 +1,3 @@
-
-
-
 import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
@@ -17,12 +14,14 @@ public class Spaceship extends JPanel
 	private BufferedImage img;
 	private ArrayList<Laser> lasers;
 	private AffineTransform at;
+	private BoundingBox bounds;
 	
 	public Spaceship()
 	{
 		loadImage();
 		v = new Vector2D();
 		lasers = new ArrayList<Laser>();
+		bounds = new BoundingBox(0,0,0,0);
 	}
 	
 	private void loadImage()
@@ -52,13 +51,13 @@ public class Spaceship extends JPanel
 	{
 		x+=v.getX();
 		y+=v.getY();
+		bounds.translate(v.getX(), v.getY());
 	}
 
 	
 	public void setY(double cy)
 	{
 		y = cy;
-
 	}
 
 	public void setX(double cx)
@@ -71,7 +70,6 @@ public class Spaceship extends JPanel
 	{
 		x = cx;
 		y = cy;
-
 	}
 
 	public void setVector(double speed, double direction)
@@ -157,6 +155,10 @@ public class Spaceship extends JPanel
 		return Math.atan(v.getX()/v.getY());
 	}
 
+	public BoundingBox getBoundingBox()
+	{
+		return bounds;
+	}
 	
 /*	public static void main(String[] args)
 	{

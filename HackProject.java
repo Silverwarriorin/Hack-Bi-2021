@@ -16,6 +16,7 @@ public class HackProject extends JPanel {
 
   private double shipSpeed = 1.5;
   private double shipDirection = 0;
+  private BoundingBox bounds;
   private ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
   
   public static void main(String[] args) {
@@ -38,10 +39,11 @@ public class HackProject extends JPanel {
       setFocusable(true);
       klist = new Key(this);
       mlist = new Mouse(this);
-      test = new Asteroid(1);
+      asteroids.add(new Asteroid(1));
       ship = new Spaceship();
       ship.setSpeed(20);
       ship.setLocation(400,400);
+      bounds = new BoundingBox(0,0,getWidth(),getHeight());
       ticker = new ActiveObject(this, 10);
       
       //set up the asteroids lists
@@ -63,8 +65,20 @@ public class HackProject extends JPanel {
   //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
   public void tick()
    {
-     test.glide();
-     ship.drive();
+     
+    ship.update();
+
+    for(Asteroid a : asteroids)
+    {
+      a.update();
+      if (ship.getBoundingBox().contains(a.getBoundingBox())>=0)
+        ;//ENDROUND
+      if(bounds)
+    }
+        
+
+    
+
      repaint(); 
    }
    
