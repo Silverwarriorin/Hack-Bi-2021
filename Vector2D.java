@@ -1,6 +1,6 @@
 public class Vector2D
 {
-    double x, y;
+    private double x, y;
     
     public Vector2D()
     {
@@ -15,12 +15,14 @@ public class Vector2D
 
     public double getSpeed()
     {
-        return y/Math.sin(Math.atan(y/x));
+        if (Math.sin(Math.atan2(y, x))==0)
+            return y;
+        return y/Math.sin(Math.atan2(y, x));
     }
     
     public double getDirection()
     {
-        return Math.atan(y/x);
+        return Math.atan2(y, x);
     }
     
     public double getX()
@@ -68,7 +70,7 @@ public class Vector2D
     
     public String toString()
     {
-        return "y: " + x + " y: " + y + " speed: " + getSpeed() + " direction: " + Math.toDegrees(getDirection());
+        return "x: " + x + " y: " + y + " speed: " + getSpeed() + " direction: " + Math.toDegrees(getDirection());
     }
 
 }
