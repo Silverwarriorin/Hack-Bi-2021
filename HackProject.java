@@ -18,7 +18,7 @@ public class HackProject extends JPanel {
   private double shipDirection = 0;
   private BoundingBox bounds;
   private ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
-  //private ArrayList<Laser>
+  private ArrayList<Laser> lasers = new ArrayList<Laser>();
   
   public static void main(String[] args) {
     JFrame frame = new JFrame("HackProject");
@@ -42,7 +42,7 @@ public class HackProject extends JPanel {
       klist = new Key(this);
       mlist = new Mouse(this);
       asteroids.add(new Asteroid(1));
-      ship = new Spaceship();
+      ship = new Spaceship(lasers);
       ship.setShipLocation(400,400);
       bounds = new BoundingBox(0,0,width,height);
       ticker = new ActiveObject(this, 10);

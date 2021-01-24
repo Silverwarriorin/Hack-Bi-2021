@@ -16,8 +16,10 @@ public class Spaceship extends JPanel
 	private ArrayList<Laser> lasers;
 	private BoundingBox bounds;
 	
-	public Spaceship()
+	public Spaceship(ArrayList<Laser> lasers)
 	{
+		this.lasers = lasers;
+
 		try
 		{
 			srcImg = ImageIO.read(new File("spaceship.png"));
