@@ -47,7 +47,7 @@ public class Asteroid extends JPanel{
         bounds = new BoundingBox(x, y, size, size);
     }
 
-    public void update()
+    public void drive()
     {
         double dx = Math.random() * (speed);
         double dy = Math.random() * (speed);
@@ -55,7 +55,6 @@ public class Asteroid extends JPanel{
         y+=dy;
         bounds.translate(dx, dy);
     
-
         if(this.myX() >= 800)
             setX(1);
 

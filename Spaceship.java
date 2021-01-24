@@ -47,7 +47,7 @@ public class Spaceship extends JPanel
 
 	}
 	
-	public void update()
+	public void drive()
 	{
 		x+=v.getX();
 		y+=v.getY();
