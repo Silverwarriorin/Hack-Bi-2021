@@ -1,5 +1,6 @@
 import java.awt.*; 
 import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
@@ -11,23 +12,13 @@ import java.util.ArrayList;
 
 public class Spaceship extends JPanel
 {
-    private double x, y, w, h;
+    private double x, y, w, h, r;
 	private Vector2D v;
-	private BufferedImage srcImg;
-	private BufferedImage img;
+	private BufferedImage srcImg, img;
 	private ArrayList<Laser> lasers;
-	private AffineTransform at;
 	private BoundingBox bounds;
 	
 	public Spaceship()
-	{
-		loadImage();
-		v = new Vector2D();
-		lasers = new ArrayList<Laser>();
-		bounds = new BoundingBox(0,0,0,0);
-	}
-	
-	private void loadImage()
 	{
 		try
 		{
@@ -40,11 +31,14 @@ public class Spaceship extends JPanel
 		}
 		
 		img = srcImg;
-		
 		w = img.getWidth(null);
 		h = img.getHeight(null);
-	}
 
+		v = new Vector2D();
+		lasers = new ArrayList<Laser>();
+		bounds = new BoundingBox(0,0,0,0);
+	}
+	
 	public void shoot()
 	{
 		lasers.add(new Laser(getShipX(), getShipY(), v));
@@ -57,7 +51,6 @@ public class Spaceship extends JPanel
 		y+=v.getY();
 		bounds.translate(v.getX(), v.getY());
 	}
-
 	
 	public void setY(double cy)
 	{
@@ -116,16 +109,21 @@ public class Spaceship extends JPanel
 	public void setDirection(double rads)
 	{
 		v.setDirection(rads);
-		final double sin = Math.abs(Math.sin(rads));
-		final double cos = Math.abs(Math.cos(rads));
-		final double width = Math.floor(img.getWidth() * cos + img.getHeight() * sin);
-		final double height = Math.floor(img.getHeight() * cos + img.getWidth() * sin);
-		final BufferedImage rotatedImage = new BufferedImage( (int)width, (int)height, srcImg.getType());
-		at = new AffineTransform();
-		at.translate(x + (width / 2), y + (height / 2));
-		at.rotate(rads,x,y);
-		at.translate(-img.getWidth() / 2, -img.getHeight() / 2);
-		img = rotatedImage;
+		if (r != rads)
+		{
+			final BufferedImage rotatedImage = new BufferedImage((int)w, (int)h, srcImg.getType());
+			AffineTransform at = new AffineTransform();
+			at.translate(x + (w / 2), y + (h / 2));
+			at.rotate(rads,x,y);
+			at.translate(-img.getWidth() / 2, -img.getHeight() / 2);
+			AffineTransformOp atOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
+			if(!srcImg.equals(img))
+				atOp.filter(srcImg, img);
+			img = rotatedImage;
+		}
+
+
+		r = rads;
 	}
 	
 	public void setSize(double width, double height)
@@ -154,8 +152,7 @@ public class Spaceship extends JPanel
 
 	public void redraw(Graphics g)
 	{
-		Graphics2D g2d = (Graphics2D) g;
-        g2d.drawImage(img, at, this);
+        g.drawImage(img, (int)x, (int)y, this);
 	}
 
 	public double getDirection()

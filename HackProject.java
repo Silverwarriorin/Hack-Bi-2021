@@ -26,14 +26,15 @@ public class HackProject extends JPanel {
     frame.setLocation(200, 100);
     frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     frame.setVisible(true);
-    HackProject driver = new HackProject();
+    HackProject driver = new HackProject(800, 800);
     frame.add(driver); 
     driver.paintComponent(frame.getGraphics());
     frame.addKeyListener(driver.getKeyListener());
     frame.addMouseMotionListener(driver.getMouseListener());
+    frame.validate();
 }
 
-  public HackProject() 
+  public HackProject(double width, double height) 
   {
       setBackground(Color.BLACK);
       setFocusable(true);
@@ -41,13 +42,12 @@ public class HackProject extends JPanel {
       mlist = new Mouse(this);
       asteroids.add(new Asteroid(1));
       ship = new Spaceship();
-      ship.setSpeed(20);
-      ship.setLocation(400,400);
-      bounds = new BoundingBox(0,0,getWidth(),getHeight());
+      ship.setShipLocation(400,400);
+      bounds = new BoundingBox(0,0,width,height);
       ticker = new ActiveObject(this, 10);
       
       //set up the asteroids lists
-      asteroids = new ArrayList<Asteroid>();
+
   }
     
   @Override
@@ -59,15 +59,17 @@ public class HackProject extends JPanel {
       RenderingHints.VALUE_ANTIALIAS_ON);
 
       ship.redraw(g);
-      test.redraw(g);
+      for(Asteroid a : asteroids)
+      {
+        a.redraw(g);
+      }
+        
   }
 
   //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
   public void tick()
    {
-     
     ship.drive();
-
     for(Asteroid a : asteroids)
     {
       a.drive();
@@ -75,10 +77,6 @@ public class HackProject extends JPanel {
         ;//ENDROUND
      // if(bounds)
     }
-        
-
-    
-
      repaint(); 
    }
    
@@ -87,7 +85,6 @@ public class HackProject extends JPanel {
     if(e.getKeyCode() == KeyEvent.VK_W)
     {
         ship.setVector(shipSpeed, shipDirection);
-       
     }
   }
 
@@ -96,7 +93,6 @@ public class HackProject extends JPanel {
     if(e.getKeyCode() == KeyEvent.VK_W)
     {
         ship.setSpeed(0);
-        
     }
   }
 
@@ -112,10 +108,7 @@ public class HackProject extends JPanel {
 
   public void mouseMoved(MouseEvent e)
   {
-    shipDirection = Math.atan((e.getY()-ship.getShipY())/((double)e.getX()-ship.getShipX()));
-    
-    ship.setDirection(shipDirection);
-    //repaint();
+    ship.setDirection(Math.atan((e.getY()-ship.getShipY())/(e.getX()-ship.getShipX())));
   }
 
   public void mouseClicked(MouseEvent e)
@@ -125,74 +118,72 @@ public class HackProject extends JPanel {
 }
 
 class Key implements KeyListener
-    { 
-      
-      HackProject cl;
+{ 
+  HackProject cl;
 
-      public Key(HackProject driver)
-      {
-        cl = driver;
-      }
+  public Key(HackProject driver)
+  {
+    cl = driver;
+  }
 
-      public void keyPressed(KeyEvent e)
-      {
-            cl.keyPressed(e); 
-      }
+  public void keyPressed(KeyEvent e)
+  {
+        cl.keyPressed(e); 
+  }
 
-      public void keyTyped(KeyEvent e)
-      {
-
-      }
-
-      public void keyReleased(KeyEvent e)
-      {
-        
-      }
-   }
-
-  class Mouse implements MouseMotionListener, MouseListener
+  public void keyTyped(KeyEvent e)
   {
 
-    private HackProject cl;
+  }
 
-    public Mouse (HackProject driver)
-    {
-       cl = driver;
-    }
+  public void keyReleased(KeyEvent e)
+  {
+    
+  }
+}
 
-    public void mouseMoved(MouseEvent e)
-    {
-      cl.mouseMoved(e);
-    }
+class Mouse implements MouseMotionListener, MouseListener
+{
 
-    public void mouseDragged(MouseEvent e)
-    {
-      
-    }
+  private HackProject cl;
 
-    public void mouseClicked(MouseEvent e)
-    {
-      cl.mouseClicked(e);
-    }
+  public Mouse (HackProject driver)
+  {
+      cl = driver;
+  }
 
-    public void mousePressed(MouseEvent e)
-    {
+  public void mouseMoved(MouseEvent e)
+  {
+    cl.mouseMoved(e);
+  }
 
-    }
+  public void mouseDragged(MouseEvent e)
+  {
+    
+  }
 
-    public void mouseReleased(MouseEvent e)
-    {
+  public void mouseClicked(MouseEvent e)
+  {
+    cl.mouseClicked(e);
+  }
 
-    }
+  public void mousePressed(MouseEvent e)
+  {
 
-    public void mouseEntered(MouseEvent e)
-    {
+  }
 
-    }
+  public void mouseReleased(MouseEvent e)
+  {
 
-    public void mouseExited(MouseEvent e)
-    {
+  }
 
-    }
+  public void mouseEntered(MouseEvent e)
+  {
 
+  }
+
+  public void mouseExited(MouseEvent e)
+  {
+
+  }
 }

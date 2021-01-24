@@ -17,6 +17,10 @@ public class Vector2D
     {
         if (Math.sin(Math.atan2(y, x))==0)
             return y;
+
+        if(x == 0 && y == 0)
+            return 0;
+            
         return y/Math.sin(Math.atan2(y, x));
     }
     
