@@ -140,7 +140,7 @@ public class HackProject extends JPanel {
     if (timer.getTimeElapsed()>.1)
     {
       for (int i = 0; i < 4; i++)
-        asteroids.add(new Asteroid(1.5));
+        asteroids.add(new Asteroid(1.5, ship));
       timer.reset();
     }
 
@@ -189,6 +189,7 @@ public class HackProject extends JPanel {
   public void mouseMoved(MouseEvent e)
   {
     ship.setDirection(Math.atan2((e.getY()-(ship.getShipY()+(ship.getShipHeight()/2))), (e.getX()-(ship.getShipX()+(ship.getShipWidth()/2)))));
+    
   }
 
   public void mouseReleased(MouseEvent e)
