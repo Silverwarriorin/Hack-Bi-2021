@@ -4,20 +4,55 @@ public class Asteroid extends JPanel{
 
     private static final long serialVersionUID = 1L;
     private double size, x, y, speed;
+    private boolean inBounds;
         
     //setting bounds for spawning x: -100 - 0 && 800 - 900 y: -100 - 0 && 800 - 900
-    private int xmax = 0, xmin = -100, ymax = 900, ymin = 800;
+    private int xmax, xmin, ymax, ymin;
 
     public Asteroid(double speed)
     {
+    	switch((int)(Math.random()*4)) {
+        case 0 : 
+      	  ymin = -30; 
+      	  ymax = -10; 
+      	  xmin = 25;
+      	  xmax = 775;
+        	  break;
+        case 1 :
+      	  ymin = 25; 
+      	  ymax = 775; 
+      	  xmin = -30;
+      	  xmax = -10;
+        	  break;
+        case 2 :
+      	  ymin = 830; 
+      	  ymax = 810; 
+      	  xmin = 25;
+      	  xmax = 775;
+        	  break;
+        case 3 : 
+      	  ymin = 25; 
+      	  ymax = 775; 
+      	  xmin = 830;
+      	  xmax = 810;
+        	  break;
+      }
 
         this.speed = speed;
         size = (int)((Math.random()*3) + 1) * 15;
         x = (int)(Math.random() * (xmax - xmin)) + xmin;
         y = (int)(Math.random() * (ymax - ymin)) + ymin;
-
-        x = 200;
-        y = 200;
+        inBounds = false;
+    }
+    
+    public boolean touchingBoundary(int rightEdge, int bottomEdge) {
+    	if (x > 0 && x < rightEdge && y > 0 && y < bottomEdge) {
+    		inBounds = true;
+    	}
+    	if (inBounds && x < 0 || inBounds && x > rightEdge || inBounds && y < 0 || inBounds && y > bottomEdge) {
+    		return true;
+    	}
+    	return false;
     }
 
     public void glide()
@@ -28,7 +63,7 @@ public class Asteroid extends JPanel{
     
     public void redraw(Graphics g)
     {
-        g.setColor(Color.WHITE);
+        g.setColor(Color.BLACK);
         g.fillOval((int)x, (int)y, (int)size, (int)size);
     }
 
