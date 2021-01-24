@@ -8,6 +8,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class Spaceship extends JPanel
 {
@@ -15,13 +16,15 @@ public class Spaceship extends JPanel
 	private Vector2D v;
 	private BufferedImage srcImg;
 	private BufferedImage img;
-
+	private ArrayList<Laser> lasers;
 	
 	public Spaceship()
 	{
 
 		loadImage();
 		v = new Vector2D();
+		lasers = new ArrayList<Laser>();
+
 
 	}
 	
@@ -41,6 +44,11 @@ public class Spaceship extends JPanel
 		
 		w = img.getWidth(null);
 		h = img.getHeight(null);
+	}
+
+	public void shoot()
+	{
+
 	}
 	
 	public void drive()
@@ -107,13 +115,13 @@ public class Spaceship extends JPanel
 		v.setDirection(rads);
 		final double sin = Math.abs(Math.sin(rads));
 		final double cos = Math.abs(Math.cos(rads));
-		final int w = (int) Math.floor(img.getWidth() * cos + srcImg.getHeight() * sin);
-		final int h = (int) Math.floor(img.getHeight() * cos + srcImg.getWidth() * sin);
-		final BufferedImage rotatedImage = new BufferedImage(w, h, srcImg.getType());
+		final double width = Math.max(1, Math.floor(img.getWidth() * cos + img.getHeight() * sin));
+		final double height = Math.max(1, Math.floor(img.getHeight() * cos + img.getWidth() * sin));
+		final BufferedImage rotatedImage = new BufferedImage((int)width, (int)height, srcImg.getType());
 		final AffineTransform at = new AffineTransform();
-		at.translate(w / 2, h / 2);
-		at.rotate(rads,0, 0);
-		at.translate(-srcImg.getWidth() / 2, -srcImg.getHeight() / 2);
+		at.translate(width / 2, height / 2);
+		at.rotate(rads,x,y);
+		at.translate(-img.getWidth() / 2, -img.getHeight() / 2);
 		final AffineTransformOp rotateOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
 		rotateOp.filter(srcImg,rotatedImage);
 		img = rotatedImage;

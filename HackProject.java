@@ -3,14 +3,9 @@ import static javax.swing.WindowConstants.EXIT_ON_CLOSE;
 import java.awt.*;
 import javax.swing.JFrame;
 import java.awt.event.*;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 public class HackProject extends JPanel {
-
-    /**
-     *
-     */
 
   private Key klist;
   private Mouse mlist;
@@ -21,7 +16,8 @@ public class HackProject extends JPanel {
 
   private double shipSpeed = 1.5;
   private double shipDirection = 0;
-
+  private ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
+  
   public HackProject() 
   {
       setBackground(Color.BLACK);
@@ -66,18 +62,17 @@ public class HackProject extends JPanel {
   public void tick()
    {
      test.glide();
+     ship.drive();
      repaint(); 
    }
    
   public void keyPressed(KeyEvent e)
   {
-
     if(e.getKeyCode() == KeyEvent.VK_W)
     {
         ship.setVector(shipSpeed, shipDirection);
-        //repaint();  
+       
     }
-    
   }
 
   public void keyReleased(KeyEvent e)
@@ -85,7 +80,7 @@ public class HackProject extends JPanel {
     if(e.getKeyCode() == KeyEvent.VK_W)
     {
         ship.setSpeed(0);
-        //repaint();  
+        
     }
   }
 
@@ -105,6 +100,11 @@ public class HackProject extends JPanel {
     ship.setDirection(shipDirection);
     
     repaint();
+  }
+
+  public void mouseClicked(MouseEvent e)
+  {
+    
   }
 }
 
@@ -134,7 +134,7 @@ class Key implements KeyListener
       }
    }
 
-  class Mouse implements MouseMotionListener
+  class Mouse implements MouseMotionListener, MouseListener
   {
 
     private HackProject cl;
@@ -144,11 +144,39 @@ class Key implements KeyListener
        cl = driver;
     }
 
-    public void mouseMoved(MouseEvent e) {
+    public void mouseMoved(MouseEvent e)
+    {
       cl.mouseMoved(e);
-   }
+    }
 
-   public void mouseDragged(MouseEvent e) {
+    public void mouseDragged(MouseEvent e)
+    {
       
-   }
+    }
+
+    public void mouseClicked(MouseEvent e)
+    {
+      cl.mouseClicked(e);
+    }
+
+    public void mousePressed(MouseEvent e)
+    {
+
+    }
+
+    public void mouseReleased(MouseEvent e)
+    {
+
+    }
+
+    public void mouseEntered(MouseEvent e)
+    {
+
+    }
+
+    public void mouseExited(MouseEvent e)
+    {
+
+    }
+
 }

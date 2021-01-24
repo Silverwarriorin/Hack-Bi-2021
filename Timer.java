@@ -1,8 +1,8 @@
 
-public class Clock {
+public class Timer {
 	private double x;
 	
-	public Clock () {
+	public Timer () {
 		x = System.currentTimeMillis();
 		
 	}

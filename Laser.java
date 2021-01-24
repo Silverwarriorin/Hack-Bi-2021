@@ -88,8 +88,6 @@ public class Laser extends JPanel{
 		return false;
 	}
 	
-	
-	
 	public void draw(Graphics g) {		
 		Graphics g2d = (Graphics2D) g;
 		
