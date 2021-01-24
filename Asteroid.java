@@ -3,77 +3,92 @@ import java.awt.*;
 public class Asteroid extends JPanel{
 
     private static final long serialVersionUID = 1L;
-    private double size, x, y, speed;
+    private double size, speedX, speedY, x, y;
         
     //setting bounds for spawning x: -100 - 0 && 800 - 900 y: -100 - 0 && 800 - 900
-    private int xmax, xmin, ymax, ymin;
+    private double xmax, xmin, ymax, ymin;
 
     private BoundingBox bounds;
     private boolean approaching = true;
 
     public Asteroid(double speed)
     {
-    	switch((int)(Math.random()*4)) {
-        case 0 : 
-      	  ymin = -30; 
-      	  ymax = -10; 
-      	  xmin = 25;
-      	  xmax = 775;
-        	  break;
-        case 1 :
-      	  ymin = 25; 
-      	  ymax = 775; 
-      	  xmin = -30;
-      	  xmax = -10;
-        	  break;
-        case 2 :
-      	  ymin = 830; 
-      	  ymax = 810; 
-      	  xmin = 25;
-      	  xmax = 775;
-        	  break;
-        case 3 : 
-      	  ymin = 25; 
-      	  ymax = 775; 
-      	  xmin = 830;
-      	  xmax = 810;
-        	  break;
-      }
 
-        this.speed = speed;
         size = (int)((Math.random()*3) + 1) * 15;
+        if(Math.random()>.5)
+        {
+            speedY = Math.random()*speed;
+            speedX = speed-speedY;
+        }
+        else
+        {
+            speedX = Math.random()*speed;
+            speedY = speed-speedX;
+        }
+
+        switch((int)(Math.random()*4))
+        {
+            //top
+            case 0 : 
+            ymin = -size; 
+            ymax = -size; 
+            xmin = 0;
+            xmax = 800;
+            if (Math.random()>.5)
+                speedX*=-1;
+            break;
+
+            //left
+            case 1 :
+            ymin = 0; 
+            ymax = 800; 
+            xmin = -size;
+            xmax = -size;
+            if (Math.random()>.5)
+                speedY*=-1;
+            break;
+
+            //bottom
+            case 2 :
+            ymin = 800; 
+            ymax = 800; 
+            xmin = 0;
+            xmax = 800;
+            if (Math.random()>.5)
+                speedX*=-1;
+            speedY*=-1;
+            break;
+
+            //right
+            case 3 : 
+            ymin = 0; 
+            ymax = 800; 
+            xmin = 800;
+            xmax = 800;
+            if (Math.random()>.5)
+                speedY*=-1;
+            speedX*=-1;
+            break;
+        }
+        
         x = (int)(Math.random() * (xmax - xmin)) + xmin;
         y = (int)(Math.random() * (ymax - ymin)) + ymin;
 
         bounds = new BoundingBox(x, y, size, size);
     }
 
-
-
     public void drive()
     {
-        double dx = Math.random() * (speed);
-        double dy = Math.random() * (speed);
-        x+=dx;
-        y+=dy;
-        bounds.translate(dx, dy);
-    
-        /*if(this.myX() >= 800)
-            setX(1);
-
-        if(this.myY() >= 800)
-            setY(1);
-        
-        if(this.myX() <= 0)
-            setX(799);
-
-        if(this.myY() <= 0)
-            setY(799);*/
+        x+=speedX;
+        y+=speedY;
+        bounds.translate(speedX, speedY);
     }
+
     public void redraw(Graphics g)
     {
         g.setColor(Color.WHITE);
         g.fillOval((int)x, (int)y, (int)size, (int)size);
+        //g.drawRect((int)bounds.getLocations()[0].x,(int)bounds.getLocations()[0].y, (int)size, (int)size);
     }
 
     public double myX()

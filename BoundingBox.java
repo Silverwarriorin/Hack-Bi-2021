@@ -1,22 +1,21 @@
 import java.awt.Polygon;
 import java.util.Arrays;
-import java.awt.Point;
 
 public class BoundingBox {
 
-    private Point[] pts;
+    private Location[] pts;
 
     public BoundingBox(double x, double y, double w, double h)
     {
-        pts = new Point[] {new Point((int)x,(int)y), new Point((int)(x+w), (int)y), new Point((int)(x+w),(int)(y+h)), new Point((int)x, (int)(y+h))};
+        pts = new Location[] {new Location((int)x,(int)y), new Location((int)(x+w), (int)y), new Location((int)(x+w),(int)(y+h)), new Location((int)x, (int)(y+h))};
     }
 
     public boolean contains(double x, double y)
     {
         Polygon p = new Polygon();
-        for(Point pt : pts)
+        for(Location pt : pts)
         {
-            p.addPoint(pt.x, pt.y);
+            p.addPoint((int)pt.x, (int)pt.y);
         }
         return p.contains(x, y);
     }
@@ -24,28 +23,27 @@ public class BoundingBox {
     public int contains(BoundingBox b)
     {
         for (int k = 0; k < 4; k++)
-            if (contains(b.getPoints()[k].x, b.getPoints()[k].y))
+            if (contains(b.getLocations()[k].x, b.getLocations()[k].y))
                 return k;
 
         return -1;
     }
 
-    public Point[] getPoints()
+    public Location[] getLocations()
     {
         return pts;
     }
 
     public void translate(double dx, double dy)
     {
-       for (Point pt : pts)
+       for (Location pt : pts)
        {
-           pt.x+=dx;
-           pt.y+=dy;
+           pt.translate(dx,dy);
        }
     }
 
     public String toString()
     {
-        return Arrays.toString(getPoints());
+        return Arrays.toString(getLocations());
     }
 }
