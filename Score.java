@@ -1,34 +1,21 @@
 public class Score 
 {
-    private int score, highscore;
-    public String dscore, dhscore;
+    private int sc, hs;
 
-    public Score()
+    public void increment()
     {
-        int score = 0;
-        int highScore = 0;
+        sc++;
+        if(sc>hs)
+            hs = sc;
     }
 
-    public void IncrementScore()
+    public String getScore()
     {
-        score++;
+        return Integer.toString(sc);
     }
 
-    public String CurrentScore()
+    public String getHighScore()
     {
-        dscore = Integer.toString(score);
-        return dscore;
-    }
-
-    public String HighScore()
-    {
-        if(score >= highscore)
-            highscore = score;
-        else
-            return Integer.toString(highscore);
-
-        dhscore = Integer.toString(highscore);
-
-        return dhscore;
+        return Integer.toString(hs);
     }
 }
