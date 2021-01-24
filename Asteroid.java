@@ -88,7 +88,7 @@ public class Asteroid extends JPanel{
     {
         g.setColor(Color.WHITE);
         g.fillOval((int)x, (int)y, (int)size, (int)size);
-        //g.drawRect((int)bounds.getLocations()[0].x,(int)bounds.getLocations()[0].y, (int)size, (int)size);
+        g.drawRect((int)bounds.getLocations()[0].x,(int)bounds.getLocations()[0].y, (int)size, (int)size);
     }
 
     public double myX()

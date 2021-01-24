@@ -40,7 +40,7 @@ public class Spaceship extends JPanel
 	
 	public void shoot()
 	{
-		lasers.add(new Laser(getShipX()+getShipWidth()/2, getShipY()+getShipHeight()/2, r));
+		lasers.add(new Laser(s*2, getShipX()+getShipWidth()/2, getShipY()+getShipHeight()/2, r));
 	}
 	
 	public void drive()
@@ -50,6 +50,8 @@ public class Spaceship extends JPanel
 		x+=v.getX();
 		y+=v.getY();
 		bounds.translate(v.getX(), v.getY());
+
+		checkBounds();
 	}
 	
 	public void setY(double cy)
@@ -67,6 +69,8 @@ public class Spaceship extends JPanel
 	{
 		x = cx;
 		y = cy;	
+
+		bounds.setLocation(cx, cy);
 	}
 	
 	public Vector2D getVector2D() {
@@ -78,26 +82,30 @@ public class Spaceship extends JPanel
 		v.setVector(speed, direction);
 	}
 	
-	public void checkboundingbox()
+	public void checkBounds()
     {
         if(getShipX() > 800)
         {
-            setX(1);
+			setX(1);
+			bounds.setLocation(1, bounds.getLocation().y);
         }
 
         if(getShipX() < 0)
         {
-            setX(799);
+			setX(799);
+			bounds.setLocation(799, bounds.getLocation().y);
         }
 
         if(getShipY() > 800)
         {
-            setY(1);
+			setY(1);
+			bounds.setLocation(bounds.getLocation().x, 1);
         }
 
         if(getShipY() < 0)
         {
-            setY(799);
+			setY(799);
+			bounds.setLocation(bounds.getLocation().x, 799);
         }
     }
 
@@ -150,7 +158,8 @@ public class Spaceship extends JPanel
 
 	public void redraw(Graphics g)
 	{
-        g.drawImage(img, (int)x, (int)y, this);
+		g.drawImage(img, (int)x, (int)y, this);
+		g.drawRect((int)bounds.getLocations()[0].x, (int)bounds.getLocations()[0].y, (int)w, (int)h);
 	}
 
 	public double getDirection()

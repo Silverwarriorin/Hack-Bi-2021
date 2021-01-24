@@ -9,6 +9,7 @@ public class HackProject extends JPanel {
 
   private Key klist;
   private Mouse mlist;
+  private Motion molist;
   private static ActiveObject ticker;
   private static final long serialVersionUID = 1L;
   private Spaceship ship;
@@ -17,6 +18,8 @@ public class HackProject extends JPanel {
   private BoundingBox bounds;
   private LinkedList<Asteroid> asteroids = new LinkedList<Asteroid>();
   private LinkedList<Laser> lasers = new LinkedList<Laser>();
+
+  private Timer chargeTimer;
   
   public static void main(String[] args) {
     JFrame frame = new JFrame("HackProject");
@@ -29,7 +32,7 @@ public class HackProject extends JPanel {
     frame.add(driver); 
     driver.paintComponent(frame.getGraphics());
     frame.addKeyListener(driver.getKeyListener());
-    frame.addMouseMotionListener(driver.getMouseListener());
+    frame.addMouseMotionListener(driver.getMotionListener());
     frame.addMouseListener(driver.getMouseListener());
     frame.validate();
 }
@@ -40,12 +43,14 @@ public class HackProject extends JPanel {
       setFocusable(true);
       mlist = new Mouse(this);
       klist = new Key(this);
-
+      molist = new Motion(this);
       ship = new Spaceship(lasers, shipSpeed);
       ship.setShipLocation(width/2,width/2);
       bounds = new BoundingBox(0,0,width,height);
       timer = new Timer();
+      chargeTimer = new Timer();
       ticker = new ActiveObject(this, 10);
+
   }
     
   @Override
@@ -61,16 +66,17 @@ public class HackProject extends JPanel {
       {
         asteroids.get(k).redraw(g);
       }
-      for(int k = 0; k < asteroids.size(); k++)
-      asteroids.get(k).redraw(g);
+      for(int k = 0; k < lasers.size(); k++)
+        lasers.get(k).redraw(g);
   }
 
   //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
-  public void tick()
+  public boolean tick()
   {
     ship.drive();
     for(int k = 0; k < asteroids.size(); k++)
     {
+
       asteroids.get(k).drive();
       //if the asteroid is inside the panel, check its 
       if (asteroids.get(k).isActive())
@@ -79,7 +85,6 @@ public class HackProject extends JPanel {
         if(bounds.contains(asteroids.get(k).getBoundingBox())<0)
         {
           asteroids.remove(k);
-          p();
           k--;
         }  
 
@@ -87,10 +92,11 @@ public class HackProject extends JPanel {
         else if(ship.getBoundingBox().contains(asteroids.get(k).getBoundingBox())>=0)
         {
           //round over
-          System.out.println("Round Over");
+          System.out.println("Game Over");
           asteroids.remove(k);
           k--;
-          p();
+          resetGame();
+          return true;
         }
 
         //if the asteroid contains a laser, remove it and the laser
@@ -101,7 +107,6 @@ public class HackProject extends JPanel {
             k--;
             lasers.remove(j);
             j--;
-            p();
           }
       }
 
@@ -122,6 +127,7 @@ public class HackProject extends JPanel {
     //if the laser leave the frame, remove it
     for(int j = 0; j < lasers.size(); j++)
     {
+      lasers.get(j).drive();
       if(!bounds.contains(lasers.get(j).getHead().x, lasers.get(j).getHead().y))
         {
           lasers.remove(j);
@@ -131,12 +137,24 @@ public class HackProject extends JPanel {
     }
 
     //n seconds interval
-    if (timer.getTimeElapsed()%50==0)
+    if (timer.getTimeElapsed()>.1)
     {
-      asteroids.add(new Asteroid(1.5));
+      for (int i = 0; i < 4; i++)
+        asteroids.add(new Asteroid(1.5));
+      timer.reset();
     }
 
+
     repaint(); 
+
+    return false;
+  }
+
+  public void resetGame()
+  {
+    asteroids.clear();
+    lasers.clear();
+    ship.setShipLocation(getWidth()/2, getHeight()/2);
   }
 
   int ct;
@@ -173,11 +191,23 @@ public class HackProject extends JPanel {
     ship.setDirection(Math.atan2((e.getY()-(ship.getShipY()+(ship.getShipHeight()/2))), (e.getX()-(ship.getShipX()+(ship.getShipWidth()/2)))));
   }
 
-  public void mouseClicked(MouseEvent e)
+  public void mouseReleased(MouseEvent e)
   {
-    ship.shoot();
+    if (chargeTimer.getTimeElapsed()>.01)
+    {
+      ship.shoot();
+      p();
+      chargeTimer.reset();
+    }
   }
+
+  public Motion getMotionListener()
+  {
+    return molist;
+  } 
 }
+
+
 
 class Key implements KeyListener
 { 
@@ -203,12 +233,53 @@ class Key implements KeyListener
   }
 }
 
-class Mouse implements MouseMotionListener, MouseListener
+class Mouse implements MouseListener
 {
 
   private HackProject cl;
 
+
   public Mouse (HackProject driver)
+  {
+    cl = driver;
+  }
+  
+  @Override
+  public void mouseClicked(MouseEvent e) {
+    // TODO Auto-generated method stub
+  }
+
+  @Override
+  public void mousePressed(MouseEvent e) {
+    // TODO Auto-generated method stub
+  }
+
+  @Override
+  public void mouseReleased(MouseEvent e) {
+    // TODO Auto-generated method stub
+      cl.mouseReleased(e);
+  }
+
+  @Override
+  public void mouseEntered(MouseEvent e) {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void mouseExited(MouseEvent e) {
+    // TODO Auto-generated method stub
+
+  }
+
+}
+
+class Motion implements MouseMotionListener
+{
+
+  private HackProject cl;
+
+  public Motion (HackProject driver)
   {
       cl = driver;
   }
@@ -221,21 +292,6 @@ class Mouse implements MouseMotionListener, MouseListener
   public void mouseDragged(MouseEvent e)
   {
     
-  }
-
-  public void mouseClicked(MouseEvent e)
-  {
-    cl.mouseClicked(e);
-  }
-
-  public void mousePressed(MouseEvent e)
-  {
-
-  }
-
-  public void mouseReleased(MouseEvent e)
-  {
-
   }
 
   public void mouseEntered(MouseEvent e)

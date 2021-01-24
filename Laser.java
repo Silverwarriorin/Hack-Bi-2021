@@ -6,23 +6,22 @@ import java.io.File;
 import javax.swing.JPanel;
 import java.awt.image.BufferedImage;
 public class Laser extends JPanel{
-	
-	private int x;
-	private int y;
-	private int w;
-	private int h;
+	 
+	private double x;
+	private double y;
+	private double w;
+	private double h;
 	private Vector2D v;
 	private Location head;
 	private BufferedImage img;
 	
-	public Laser(double x, double y, double rads)
+	public Laser(double s, double x, double y, double rads)
 	{
-		this.x = (int) x;
-		this.y = (int) y;
+		this.x = x;
+		this.y = y;
 		v = new Vector2D();
-		v.setVector(1, rads);
-		head = new Location((int)x, (int)y);
-
+		v.setVector(s, rads);
+		
 		try
 		{
 			img = ImageIO.read(new File("laser.png"));
@@ -44,6 +43,9 @@ public class Laser extends JPanel{
 
 		w = img.getWidth();
 		h = img.getHeight();
+
+		head = new Location (x + w/2, y + w/2);
+
 	}
 
 	public Location getHead()
@@ -54,10 +56,12 @@ public class Laser extends JPanel{
 	public void drive() {
 		x += v.getX();
 		y += v.getY();
+		head.x = x+w/2;
+		head.y = y+h/2;
 	}
 	
 	public void redraw(Graphics g) {		
-		g.drawImage(img, x-img.getWidth()/2, y-img.getHeight()/2, this);
+		g.drawImage(img, (int)(x-img.getWidth()/2),(int)(y-img.getHeight()/2), this);
 	}
 
 	public void setVector(double speed, double direction) {

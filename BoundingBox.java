@@ -46,4 +46,21 @@ public class BoundingBox {
     {
         return Arrays.toString(getLocations());
     }
+
+    public void setLocation(double cx, double cy)
+    {
+        double dx = cx - pts[0].x;
+        double dy = cy - pts[0].y;
+
+        for (Location pt : pts)
+        {
+            pt.x+=dx;
+            pt.y+=dy;
+        }
+    }
+
+    public Location getLocation()
+    {
+        return new Location ( pts[0].x, pts[0].y);
+    }
 }
