@@ -35,7 +35,7 @@ public class Spaceship extends JPanel
 		h = img.getHeight(null);
 
 		v = new Vector2D();
-		bounds = new BoundingBox(0,0,0,0);
+		bounds = new BoundingBox(0,0,w,h);
 	}
 	
 	public void shoot()
@@ -119,10 +119,10 @@ public class Spaceship extends JPanel
 		v.setDirection(rads);
 		if (r != rads)
 		{
-			BufferedImage output = new BufferedImage(srcImg.getWidth(), srcImg.getHeight(), srcImg.getType());
+			BufferedImage output = new BufferedImage((int)w, (int)h, srcImg.getType());
 			AffineTransform transform = new AffineTransform();
-        	transform.rotate(rads+Math.toRadians(90), img.getWidth()/2, img.getHeight()/2);
-        	double offset = (img.getWidth()-img.getHeight())/2;
+        	transform.rotate(rads+Math.toRadians(90), (int)w/2, (int)h/2);
+        	double offset = (w-h)/2;
         	transform.translate(offset,offset);
 			AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
 			op.filter(srcImg, output);

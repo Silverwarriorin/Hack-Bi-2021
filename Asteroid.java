@@ -1,5 +1,8 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
+import java.awt.image.BufferedImage;
 public class Asteroid extends JPanel{
 
     private static final long serialVersionUID = 1L;
@@ -10,11 +13,31 @@ public class Asteroid extends JPanel{
 
     private BoundingBox bounds;
     private boolean approaching = true;
+    private BufferedImage img;
 
     public Asteroid(double speed)
     {
 
         size = (int)((Math.random()*3) + 1) * 15;
+        String path;
+        
+        if(size==15)
+                path = "small.png";
+        else if (size==30)
+                path = "medium.png";
+        else 
+                path = "large.png";
+
+        try
+		{
+			img = ImageIO.read(new File(path));
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.toString() + e.getStackTrace());
+		}
+
         if(Math.random()>.5)
         {
             speedY = Math.random()*speed;
@@ -86,9 +109,9 @@ public class Asteroid extends JPanel{
 
     public void redraw(Graphics g)
     {
-        g.setColor(Color.WHITE);
-        g.fillOval((int)x, (int)y, (int)size, (int)size);
-        g.drawRect((int)bounds.getLocations()[0].x,(int)bounds.getLocations()[0].y, (int)size, (int)size);
+        //g.setColor(Color.WHITE);
+        //g.fillOval((int)x, (int)y, (int)size, (int)size);
+        g.drawImage(img, (int)x, (int)y, this);
     }
 
     public double myX()
