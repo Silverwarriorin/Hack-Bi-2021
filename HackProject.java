@@ -14,12 +14,11 @@ public class HackProject extends JPanel {
   private static final long serialVersionUID = 1L;
   private Spaceship ship;
   private Timer timer;
+  private Timer chargeTimer;
   private static final double shipSpeed = 1.5;
   private BoundingBox bounds;
   private LinkedList<Asteroid> asteroids = new LinkedList<Asteroid>();
   private LinkedList<Laser> lasers = new LinkedList<Laser>();
-
-  private Timer chargeTimer;
   
   public static void main(String[] args) {
     JFrame frame = new JFrame("HackProject");
@@ -41,14 +40,14 @@ public class HackProject extends JPanel {
   {
       setBackground(Color.BLACK);
       setFocusable(true);
+      timer = new Timer();
+      chargeTimer = new Timer();
       mlist = new Mouse(this);
       klist = new Key(this);
       molist = new Motion(this);
       ship = new Spaceship(lasers, shipSpeed);
       ship.setShipLocation(width/2,width/2);
       bounds = new BoundingBox(0,0,width,height);
-      timer = new Timer();
-      chargeTimer = new Timer();
       ticker = new ActiveObject(this, 10);
 
   }
@@ -74,9 +73,10 @@ public class HackProject extends JPanel {
   public boolean tick()
   {
     ship.drive();
+    boolean deleted = false;
     for(int k = 0; k < asteroids.size(); k++)
     {
-
+      
       asteroids.get(k).drive();
       //if the asteroid is inside the panel, check its 
       if (asteroids.get(k).isActive())
@@ -86,6 +86,7 @@ public class HackProject extends JPanel {
         {
           asteroids.remove(k);
           k--;
+          deleted = true;
         }  
 
         //if the ship contains the asteroid, end the round;
@@ -100,13 +101,14 @@ public class HackProject extends JPanel {
         }
 
         //if the asteroid contains a laser, remove it and the laser
-        else for(int j = 0; j<lasers.size(); j++)
+        else for(int j = 0; j<lasers.size() && !deleted; j++)
           if(asteroids.get(k).getBoundingBox().contains(lasers.get(j).getHead().x, lasers.get(j).getHead().y))
           {
             asteroids.remove(k);
             k--;
             lasers.remove(j);
             j--;
+            deleted = true;
           }
       }
 
@@ -125,8 +127,9 @@ public class HackProject extends JPanel {
     }
 
     //if the laser leave the frame, remove it
-    for(int j = 0; j < lasers.size(); j++)
+    for(int j = 0; j < lasers.size() && !deleted; j++)
     {
+
       lasers.get(j).drive();
       if(!bounds.contains(lasers.get(j).getHead().x, lasers.get(j).getHead().y))
         {
@@ -137,13 +140,14 @@ public class HackProject extends JPanel {
     }
 
     //n seconds interval
-    if (timer.getTimeElapsed()>.1)
+    if (timer.getTimeElapsed()>.25)
     {
       for (int i = 0; i < 4; i++)
         asteroids.add(new Asteroid(1.5, ship));
+
+      asteroids.add(new Asteroid(1.5));
       timer.reset();
     }
-
 
     repaint(); 
 
@@ -194,10 +198,10 @@ public class HackProject extends JPanel {
 
   public void mouseReleased(MouseEvent e)
   {
-    if (chargeTimer.getTimeElapsed()>.01)
+    System.out.println(chargeTimer.getTimeElapsed());
+    if (chargeTimer.getTimeElapsed()>.35)
     {
       ship.shoot();
-      p();
       chargeTimer.reset();
     }
   }
@@ -207,8 +211,6 @@ public class HackProject extends JPanel {
     return molist;
   } 
 }
-
-
 
 class Key implements KeyListener
 { 
