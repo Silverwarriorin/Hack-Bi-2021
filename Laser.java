@@ -14,7 +14,8 @@ public class Laser extends JPanel{
 	private int height;
 	private Vector2D vector;
 	
-	public Laser(Spaceship player) {
+	public Laser(Spaceship player)
+	{
 		x = player.getX();
 		y = player.getY();
 		vector = new Vector2D(x, y);

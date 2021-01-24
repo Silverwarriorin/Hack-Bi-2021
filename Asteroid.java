@@ -69,9 +69,8 @@ public class Asteroid extends JPanel{
     }
     public void redraw(Graphics g)
     {
-        g.setColor(Color.BLACK);
+        g.setColor(Color.WHITE);
         g.fillOval((int)x, (int)y, (int)size, (int)size);
-
     }
 
     public double myX()
@@ -100,12 +99,5 @@ public class Asteroid extends JPanel{
     {
         return bounds;
     }
-
-
-
-    
-
-    
-
 }
 

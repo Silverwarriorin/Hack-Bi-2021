@@ -36,11 +36,6 @@ public class Spaceship extends JPanel
 		bounds = new BoundingBox(0,0,0,0);
 	}
 	
-	private void loadImage()
-	{
-		
-	}
-
 	public void shoot()
 	{
 
@@ -52,7 +47,6 @@ public class Spaceship extends JPanel
 		y+=v.getY();
 		bounds.translate(v.getX(), v.getY());
 	}
-
 	
 	public void setY(double cy)
 	{
@@ -120,7 +114,7 @@ public class Spaceship extends JPanel
 			img = rotatedImage;
 		}
 
-		System.out.println(w);
+
 		r = rads;
 	}
 	
