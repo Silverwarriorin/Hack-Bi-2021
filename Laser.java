@@ -12,9 +12,9 @@ public class Laser extends JPanel{
 	private int height;
 	private Vector2D vector;
 	
-	public Laser(int x, int y, Vector2D vect) {
-		this.x = x;
-		this.y = y;
+	public Laser(double x, double y, Vector2D vect) {
+		this.x = (int) x;
+		this.y = (int) y;
 		vector = vect.clone();
 		width = 5;
 		height = 5;
@@ -52,6 +52,10 @@ public class Laser extends JPanel{
 		Graphics g2d = (Graphics2D) g;
 		
 		g2d.setColor(Color.yellow);
-		g2d.fillRect(x - width/2, y - height/2, width, height);
+		g2d.fillRect((int) (x - width/2), (int) (y - height/2), width, height);
+	}
+
+	public void setVector(double speed, double direction) {
+		vector.setVector(speed, direction);
 	}
 }
