@@ -5,6 +5,7 @@ import javax.swing.JFrame;
 import java.awt.event.*;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 public class HackProject extends JPanel {
 
@@ -21,6 +22,7 @@ public class HackProject extends JPanel {
 
   private double shipSpeed = 1.5;
   private double shipDirection = 0;
+  private ArrayList<Asteroid> asteroids;
 
   public HackProject() 
   {
@@ -32,6 +34,9 @@ public class HackProject extends JPanel {
       ship = new Spaceship();
       ship.setSpeed(20);
       ticker = new ActiveObject(this, 10);
+      
+      //set up the asteroids lists
+      asteroids = new ArrayList<Asteroid>();
 
   }
   
