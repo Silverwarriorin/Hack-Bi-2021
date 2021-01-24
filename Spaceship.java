@@ -103,17 +103,15 @@ public class Spaceship extends JPanel
 		v.setDirection(rads);
 		if (r != rads)
 		{
-			final BufferedImage rotatedImage = new BufferedImage((int)w, (int)h, srcImg.getType());
-			AffineTransform at = new AffineTransform();
-			at.translate(x + (w / 2), y + (h / 2));
-			at.rotate(rads,x,y);
-			at.translate(-img.getWidth() / 2, -img.getHeight() / 2);
-			AffineTransformOp atOp = new AffineTransformOp(at, AffineTransformOp.TYPE_BILINEAR);
-			if(!srcImg.equals(img))
-				atOp.filter(srcImg, img);
-			img = rotatedImage;
+			BufferedImage output = new BufferedImage(srcImg.getWidth(), srcImg.getHeight(), srcImg.getType());
+			AffineTransform transform = new AffineTransform();
+        	transform.rotate(rads+Math.toRadians(90), img.getWidth()/2, img.getHeight()/2);
+        	double offset = (img.getWidth()-img.getHeight())/2;
+        	transform.translate(offset,offset);
+			AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+			op.filter(srcImg, output);
+			img = output;
 		}
-
 
 		r = rads;
 	}

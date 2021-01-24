@@ -18,6 +18,7 @@ public class HackProject extends JPanel {
   private double shipDirection = 0;
   private BoundingBox bounds;
   private ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
+  //private ArrayList<Laser>
   
   public static void main(String[] args) {
     JFrame frame = new JFrame("HackProject");
@@ -108,7 +109,7 @@ public class HackProject extends JPanel {
 
   public void mouseMoved(MouseEvent e)
   {
-    ship.setDirection(Math.atan((e.getY()-ship.getShipY())/(e.getX()-ship.getShipX())));
+    ship.setDirection(Math.atan2((e.getY()-(ship.getShipY()+(ship.getShipHeight()/2))), (e.getX()-(ship.getShipX()+(ship.getShipWidth()/2)))));
   }
 
   public void mouseClicked(MouseEvent e)
