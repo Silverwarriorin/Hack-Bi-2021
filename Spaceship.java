@@ -1,10 +1,11 @@
-import java.awt.*;
+import java.awt.*; 
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import java.util.ArrayList;
 
 public class Spaceship extends JPanel
@@ -38,7 +39,8 @@ public class Spaceship extends JPanel
 	
 	public void shoot()
 	{
-
+		lasers.add(new Laser(getShipX(), getShipY(), v));
+		lasers.get(lasers.size() - 1).setVector(v.getSpeed() * 2, v.getDirection());
 	}
 	
 	public void drive()
@@ -63,6 +65,10 @@ public class Spaceship extends JPanel
 	{
 		x = cx;
 		y = cy;
+	}
+	
+	public Vector2D getVector2D() {
+		return v;
 	}
 
 	public void setVector(double speed, double direction)
