@@ -54,7 +54,7 @@ public class Asteroid extends JPanel{
         x+=dx;
         y+=dy;
         bounds.translate(dx, dy);
-    }
+    
 
         if(this.myX() >= 800)
             setX(1);
