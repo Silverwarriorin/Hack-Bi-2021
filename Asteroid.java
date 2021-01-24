@@ -10,11 +10,13 @@ public class Asteroid extends JPanel{
 
     private BoundingBox bounds;
     private boolean approaching = true;
+    private Vector2D vect;
 
-    public Asteroid(double speed)
+    public Asteroid(double speed, Spaceship player)
     {
 
         size = (int)((Math.random()*3) + 1) * 15;
+        vect = new Vector2D();
         if(Math.random()>.5)
         {
             speedY = Math.random()*speed;
@@ -70,7 +72,9 @@ public class Asteroid extends JPanel{
             speedX*=-1;
             break;
         }
-        
+
+        newDirection(speed, player.getDirection());
+
         x = (int)(Math.random() * (xmax - xmin)) + xmin;
         y = (int)(Math.random() * (ymax - ymin)) + ymin;
 
@@ -82,6 +86,12 @@ public class Asteroid extends JPanel{
         x+=speedX;
         y+=speedY;
         bounds.translate(speedX, speedY);
+    }
+
+    public void newDirection(double speed, double rads) {
+        vect.setVector(speed, rads);
+        speedX = vect.getX();
+        speedY = vect.getY();
     }
 
     public void redraw(Graphics g)
