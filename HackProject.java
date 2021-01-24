@@ -73,7 +73,7 @@ public class HackProject extends JPanel {
       a.update();
       if (ship.getBoundingBox().contains(a.getBoundingBox())>=0)
         ;//ENDROUND
-      if(bounds)
+     // if(bounds)
     }
         
 

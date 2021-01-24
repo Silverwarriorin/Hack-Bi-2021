@@ -47,7 +47,7 @@ public class Asteroid extends JPanel{
         bounds = new BoundingBox(x, y, size, size);
     }
 
-    public void glide()
+    public void update()
     {
         double dx = Math.random() * (speed);
         double dy = Math.random() * (speed);
