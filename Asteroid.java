@@ -10,7 +10,6 @@ public class Asteroid extends JPanel{
 
     public Asteroid(double speed)
     {
-
         this.speed = speed;
         size = (int)((Math.random()*3) + 1) * 15;
         x = (int)(Math.random() * (xmax - xmin)) + xmin;
@@ -25,7 +24,7 @@ public class Asteroid extends JPanel{
         x += Math.random() * (speed);
         y += Math.random() * (speed);
     }
-    
+
     public void redraw(Graphics g)
     {
         g.setColor(Color.WHITE);
