@@ -10,7 +10,6 @@ public class Asteroid extends JPanel{
 
     public Asteroid(double speed)
     {
-
         this.speed = speed;
         size = (int)((Math.random()*3) + 1) * 15;
         x = (int)(Math.random() * (xmax - xmin)) + xmin;
@@ -20,18 +19,21 @@ public class Asteroid extends JPanel{
         y = 200;
     }
 
+<<<<<<< HEAD
+=======
     public void glide()
     {
         x += Math.random() * (speed);
         y += Math.random() * (speed);
     }
-    
+
     public void redraw(Graphics g)
     {
         g.setColor(Color.WHITE);
         g.fillOval((int)x, (int)y, (int)size, (int)size);
     }
 
+>>>>>>> a17ed4637a9ed1f298962d6b7d630848a75e6766
     public double myX()
     {
         return x;
@@ -53,6 +55,32 @@ public class Asteroid extends JPanel{
 		x = cx;
 
 	}
+
+    public void glide()
+    {
+        x += Math.random() * (speed);
+        y += Math.random() * (speed);
+
+        if(this.myX() >= 800)
+            setX(1);
+
+        if(this.myY() >= 800)
+            setY(1);
+        
+        if(this.myX() <= 0)
+            setX(799);
+
+        if(this.myY() <= 0)
+            setY(799);
+    }
+    
+    public void redraw(Graphics g)
+    {
+        g.setColor(Color.WHITE);
+        g.fillOval((int)x, (int)y, (int)size, (int)size);
+    }
+
+    
 
     
 

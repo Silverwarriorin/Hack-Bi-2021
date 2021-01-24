@@ -18,6 +18,20 @@ public class HackProject extends JPanel {
   private double shipDirection = 0;
   private ArrayList<Asteroid> asteroids = new ArrayList<Asteroid>();
   
+  public static void main(String[] args) {
+    JFrame frame = new JFrame("HackProject");
+    frame.setBackground(Color.BLACK);
+    frame.setSize(800, 800);
+    frame.setLocation(200, 100);
+    frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
+    frame.setVisible(true);
+    HackProject driver = new HackProject();
+    frame.add(driver); 
+    driver.paintComponent(frame.getGraphics());
+    frame.addKeyListener(driver.getKeyListener());
+    frame.addMouseMotionListener(driver.getMouseListener());
+}
+
   public HackProject() 
   {
       setBackground(Color.BLACK);
@@ -27,27 +41,12 @@ public class HackProject extends JPanel {
       test = new Asteroid(1);
       ship = new Spaceship();
       ship.setSpeed(20);
+      ship.setLocation(400,400);
       ticker = new ActiveObject(this, 10);
       
       //set up the asteroids lists
       asteroids = new ArrayList<Asteroid>();
-
   }
-  
-  public static void main(String[] args) {
-      JFrame frame = new JFrame("HackProject");
-      frame.setBackground(Color.BLACK);
-      frame.setSize(800, 800);
-      frame.setLocation(200, 100);
-      frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
-      frame.setVisible(true);
-      HackProject driver = new HackProject();
-      frame.add(driver); 
-      driver.paintComponent(frame.getGraphics());
-      frame.addKeyListener(driver.getKeyListener());
-      frame.addMouseMotionListener(driver.getMouseListener());
-  }
-    
     
   @Override
   public void paintComponent(Graphics g)
@@ -99,15 +98,15 @@ public class HackProject extends JPanel {
 
   public void mouseMoved(MouseEvent e)
   {
-    shipDirection = Math.atan((e.getY()-ship.getShipY())/(e.getX()-ship.getShipX()));
-    ship.setDirection(shipDirection);
+    shipDirection = Math.atan((e.getY()-ship.getShipY())/((double)e.getX()-ship.getShipX()));
     
+    ship.setDirection(shipDirection);
     repaint();
   }
 
   public void mouseClicked(MouseEvent e)
   {
-    
+    ship.shoot();
   }
 }
 

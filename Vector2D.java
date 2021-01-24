@@ -13,12 +13,6 @@ public class Vector2D
         this.y=y;
     }
 
-    public void setVector(double speed, double radians)
-    {
-        x = Math.cos(radians)*speed;
-        y = Math.sin(radians)*speed;
-    }
-    
     public double getSpeed()
     {
         return y/Math.sin(Math.atan(y/x));
@@ -50,7 +44,23 @@ public class Vector2D
         x = Math.cos(radians)*getSpeed();
         y = Math.sin(radians)*getSpeed();
     }
+
+    public void setVector(double speed, double radians)
+    {
+        x = Math.cos(radians)*speed;
+        y = Math.sin(radians)*speed;
+    }
+
+    public void setX(double x)
+    {
+        this.x = x;
+    }
     
+    public void setY(double y)
+    {
+        this.y = y;
+    }
+
     public Vector2D clone()
     {
         return new Vector2D(x,y);
