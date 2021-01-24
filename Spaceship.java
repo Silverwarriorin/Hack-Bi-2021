@@ -6,17 +6,17 @@ import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class Spaceship extends JPanel
 {
     private double x, y, w, h, r;
 	private Vector2D v;
 	private BufferedImage srcImg, img;
-	private ArrayList<Laser> lasers;
+	private LinkedList<Laser> lasers;
 	private BoundingBox bounds;
 	
-	public Spaceship(ArrayList<Laser> lasers)
+	public Spaceship(LinkedList<Laser> lasers)
 	{
 		this.lasers = lasers;
 
@@ -35,14 +35,12 @@ public class Spaceship extends JPanel
 		h = img.getHeight(null);
 
 		v = new Vector2D();
-		lasers = new ArrayList<Laser>();
 		bounds = new BoundingBox(0,0,0,0);
 	}
 	
 	public void shoot()
 	{
-		lasers.add(new Laser(getShipX(), getShipY(), v));
-		lasers.get(lasers.size() - 1).setVector(v.getSpeed() * 2, v.getDirection());
+		lasers.add(new Laser(getShipX()+getShipWidth()/2, getShipY()+getShipHeight()/2, r));
 	}
 	
 	public void drive()

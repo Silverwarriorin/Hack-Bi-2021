@@ -8,6 +8,6 @@ public class Timer {
 	}
 	
 	public double getTimeElapsed() {
-		return System.currentTimeMillis() - x;
+		return (System.currentTimeMillis() - x)/1000;
 	}
 }

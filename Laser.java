@@ -1,61 +1,66 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import javax.imageio.ImageIO;
+import java.io.File;
 import javax.swing.JPanel;
+import java.awt.image.BufferedImage;
 public class Laser extends JPanel{
 	
 	private int x;
 	private int y;
-	private double direction;
-	private double speed;
-	private int width;
-	private int height;
-	private Vector2D vector;
+	private int w;
+	private int h;
+	private Vector2D v;
+	private Point head;
+	private BufferedImage img;
 	
-	public Laser(double x, double y, Vector2D vect) {
+	public Laser(double x, double y, double rads)
+	{
 		this.x = (int) x;
 		this.y = (int) y;
-		vector = vect.clone();
-		width = 5;
-		height = 5;
+		v = new Vector2D();
+		v.setVector(1, rads);
+		w = 5;
+		h = 5;
+
+		head = new Point((int)x, (int)y);
+
+		try
+		{
+			img = ImageIO.read(new File("laser.png"));
+		}
+		
+		catch (Exception e)
+		{
+			System.out.println(e.toString() + e.getStackTrace());
+		}
+
+		BufferedImage output = new BufferedImage(img.getWidth(), img.getHeight(), img.getType());
+		AffineTransform transform = new AffineTransform();
+		transform.rotate(v.getDirection()+Math.toRadians(90), img.getWidth()/2, img.getHeight()/2);
+		double offset = (img.getWidth()-img.getHeight())/2;
+		transform.translate(offset,offset);
+		AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
+		op.filter(img, output);
+		img = output;
 	}
 
-	public boolean edgeCollision (int rightEdge, int bottomEdge) {
-		if (x < 0) {
-			return true;
-		}
-		else if (x > rightEdge) {
-			return true;
-		}
-		else if (y < 0) {
-			return true;
-		}
-		else if (y > bottomEdge) {
-			return true;
-		}
-		return false;
-	}
-	
-	public boolean hitAsteroid (Asteroid asteroid) {
-		if (asteroid.getBoundingBox().contains(x, y)) {
-			return true;
-		}
-		return false;
+	public Point getHead()
+	{
+		return head;
 	}
 	
 	public void drive() {
-		x += vector.getX();
-		y += vector.getY();
+		x += v.getX();
+		y += v.getY();
 	}
 	
-	public void draw(Graphics g) {		
-		Graphics g2d = (Graphics2D) g;
-		
-		g2d.setColor(Color.yellow);
-		g2d.fillRect((int) (x - width/2), (int) (y - height/2), width, height);
+	public void redraw(Graphics g) {		
+		g.drawImage(img, x-img.getWidth()/2, y-img.getHeight()/2, this);
 	}
 
 	public void setVector(double speed, double direction) {
-		vector.setVector(speed, direction);
+		v.setVector(speed, direction);
 	}
 }
