@@ -27,7 +27,7 @@ public class Score
         g.drawString(getHighScore(), 50, 80);
     }
 
-    publci void reset()
+    public void reset()
     {
         sc = 0;
     }
