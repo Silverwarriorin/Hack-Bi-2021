@@ -4,7 +4,6 @@ public class Asteroid extends JPanel{
 
     private static final long serialVersionUID = 1L;
     private double size, x, y, speed;
-    private boolean inBounds;
         
     //setting bounds for spawning x: -100 - 0 && 800 - 900 y: -100 - 0 && 800 - 900
     private int xmax, xmin, ymax, ymin;
@@ -42,17 +41,6 @@ public class Asteroid extends JPanel{
         size = (int)((Math.random()*3) + 1) * 15;
         x = (int)(Math.random() * (xmax - xmin)) + xmin;
         y = (int)(Math.random() * (ymax - ymin)) + ymin;
-        inBounds = false;
-    }
-    
-    public boolean touchingBoundary(int rightEdge, int bottomEdge) {
-    	if (x > 0 && x < rightEdge && y > 0 && y < bottomEdge) {
-    		inBounds = true;
-    	}
-    	if (inBounds && x < 0 || inBounds && x > rightEdge || inBounds && y < 0 || inBounds && y > bottomEdge) {
-    		return true;
-    	}
-    	return false;
     }
 
     public void glide()
