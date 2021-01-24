@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import java.awt.event.*;
 import java.util.LinkedList;
 
-public class HackProject extends JPanel {
+public class Asteroids extends JPanel {
 
   private Key klist;
   private Mouse mlist;
@@ -22,13 +22,13 @@ public class HackProject extends JPanel {
   private Score score;
   
   public static void main(String[] args) {
-    JFrame frame = new JFrame("HackProject");
+    JFrame frame = new JFrame("Asteroids");
     frame.setBackground(Color.BLACK);
     frame.setSize(800, 800);
     frame.setLocation(200, 100);
     frame.setDefaultCloseOperation(EXIT_ON_CLOSE);
     frame.setVisible(true);
-    HackProject driver = new HackProject(800, 800);
+    Asteroids driver = new Asteroids(800, 800);
     frame.add(driver); 
     driver.paintComponent(frame.getGraphics());
     frame.addKeyListener(driver.getKeyListener());
@@ -37,7 +37,7 @@ public class HackProject extends JPanel {
     frame.validate();
 }
 
-  public HackProject(double width, double height) 
+  public Asteroids(double width, double height) 
   {
       setBackground(Color.BLACK);
       setFocusable(true);
@@ -218,9 +218,9 @@ public class HackProject extends JPanel {
 
 class Key implements KeyListener
 { 
-  HackProject cl;
+  Asteroids cl;
 
-  public Key(HackProject driver)
+  public Key(Asteroids driver)
   {
     cl = driver;
   }
@@ -243,10 +243,10 @@ class Key implements KeyListener
 class Mouse implements MouseListener
 {
 
-  private HackProject cl;
+  private Asteroids cl;
 
 
-  public Mouse (HackProject driver)
+  public Mouse (Asteroids driver)
   {
     cl = driver;
   }
@@ -284,9 +284,9 @@ class Mouse implements MouseListener
 class Motion implements MouseMotionListener
 {
 
-  private HackProject cl;
+  private Asteroids cl;
 
-  public Motion (HackProject driver)
+  public Motion (Asteroids driver)
   {
       cl = driver;
   }

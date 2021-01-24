@@ -4,11 +4,11 @@ public class ActiveObject extends Thread
     private static int id = 1;
     private double pauseTime = 5;
             
-    private static final ThreadGroup GROUP = new ThreadGroup("HackProject");
+    private static final ThreadGroup GROUP = new ThreadGroup("Asteroids");
     
-    private HackProject cl;
+    private Asteroids cl;
     
-    public ActiveObject(HackProject client, double pauseTime)
+    public ActiveObject(Asteroids client, double pauseTime)
     {
         super();
         this.pauseTime = pauseTime;
