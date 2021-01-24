@@ -10,16 +10,16 @@ import java.util.LinkedList;
 
 public class Spaceship extends JPanel
 {
-    private double x, y, w, h, r;
+    private double x, y, w, h, r, s;
 	private Vector2D v;
 	private BufferedImage srcImg, img;
 	private LinkedList<Laser> lasers;
 	private BoundingBox bounds;
 	
-	public Spaceship(LinkedList<Laser> lasers)
+	public Spaceship(LinkedList<Laser> lasers, double speed)
 	{
 		this.lasers = lasers;
-
+		s = speed;
 		try
 		{
 			srcImg = ImageIO.read(new File("spaceship.png"));
@@ -45,6 +45,8 @@ public class Spaceship extends JPanel
 	
 	public void drive()
 	{
+		if(v.getSpeed()!=0)
+			v.setSpeed(s);
 		x+=v.getX();
 		y+=v.getY();
 		bounds.translate(v.getX(), v.getY());
@@ -64,7 +66,7 @@ public class Spaceship extends JPanel
 	public void setShipLocation(double cx, double cy)
 	{
 		x = cx;
-		y = cy;
+		y = cy;	
 	}
 	
 	public Vector2D getVector2D() {

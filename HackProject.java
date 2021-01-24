@@ -39,10 +39,10 @@ public class HackProject extends JPanel {
   {
       setBackground(Color.BLACK);
       setFocusable(true);
-      klist = new Key(this);
       mlist = new Mouse(this);
+      klist = new Key(this);
       asteroids.add(new Asteroid(1));
-      ship = new Spaceship(lasers);
+      ship = new Spaceship(lasers, 2);
       ship.setShipLocation(400,400);
       bounds = new BoundingBox(0,0,width,height);
       timer = new Timer();
@@ -102,7 +102,6 @@ public class HackProject extends JPanel {
         }
     }
       
-
     //%n==0 where n is seconds passed
     if (timer.getTimeElapsed()%2==0)
     {
@@ -116,16 +115,15 @@ public class HackProject extends JPanel {
     if(e.getKeyCode() == KeyEvent.VK_W)
     {
         ship.setSpeed(2);
+        System.out.println("hello");
+    }
+
+    if(e.getKeyCode() == KeyEvent.VK_S)
+    {
+      ship.setSpeed(0);
     }
   }
 
-  public void keyReleased(KeyEvent e)
-  {
-    if(e.getKeyCode() == KeyEvent.VK_W)
-    {
-        ship.setShipLocation(ship.getShipX(),ship.getShipY());
-    }
-  }
 
   public Key getKeyListener()
   {
@@ -169,7 +167,6 @@ class Key implements KeyListener
 
   public void keyReleased(KeyEvent e)
   {
-    
   }
 }
 
