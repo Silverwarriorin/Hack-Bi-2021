@@ -70,8 +70,8 @@ public class HackProject extends JPanel {
       for(int k = 0; k < lasers.size(); k++)
         lasers.get(k).redraw(g);
 
-      g.drawString(score.dscore, 50, 50);
-      g.drawString(score.dhscore, 50, 80);
+      score.redraw(g);
+
   }
 
   //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
@@ -102,6 +102,7 @@ public class HackProject extends JPanel {
           asteroids.remove(k);
           k--;
           resetGame();
+          score.reset();
           return true;
         }
 
@@ -114,7 +115,7 @@ public class HackProject extends JPanel {
             lasers.remove(j);
             j--;
             deleted = true;
-            score.IncrementScore();
+            score.increment();
           }
       }
 

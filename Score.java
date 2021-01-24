@@ -1,3 +1,4 @@
+import java.awt.*;
 public class Score 
 {
     private int sc, hs;
@@ -17,5 +18,17 @@ public class Score
     public String getHighScore()
     {
         return Integer.toString(hs);
+    }
+
+    public void redraw(Graphics g)
+    {
+        g.setColor(Color.WHITE);
+        g.drawString(getScore(), 50, 50);
+        g.drawString(getHighScore(), 50, 80);
+    }
+
+    publci void reset()
+    {
+        sc = 0;
     }
 }
