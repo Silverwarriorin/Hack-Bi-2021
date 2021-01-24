@@ -37,10 +37,7 @@ public class Laser extends JPanel{
 	}
 	
 	public boolean hitAsteroid (Asteroid asteroid) {
-		if (asteroid.getBoundingBox().contains(x, y)) {
-			return true;
-		}
-		return false;
+		return asteroid.getBoundingBox().contains(x, y);
 	}
 	
 	public void drive() {
