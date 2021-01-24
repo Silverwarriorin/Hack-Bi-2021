@@ -23,8 +23,8 @@ public class Score
     public void redraw(Graphics g)
     {
         g.setColor(Color.WHITE);
-        g.drawString(getScore(), 50, 50);
-        g.drawString(getHighScore(), 50, 80);
+        g.drawString("Score: " + getScore(), 50, 50);
+        g.drawString("High Score: " + getHighScore(), 50, 80);
     }
 
     public void reset()
