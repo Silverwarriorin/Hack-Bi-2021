@@ -1,13 +1,13 @@
 
 public class Timer {
-	private double x;
+	private Long x;
 	
 	public Timer () {
 		x = System.currentTimeMillis();
 		
 	}
 	
-	public double getTimeElapsed() {
-		return (System.currentTimeMillis() - x)/1000;
+	public long getTimeElapsed() {
+		return (int)((System.currentTimeMillis() - x)/5);
 	}
 }

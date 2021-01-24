@@ -56,12 +56,12 @@ public class HackProject extends JPanel {
       RenderingHints.VALUE_ANTIALIAS_ON);
 
       ship.redraw(g);
-      for(Asteroid a : asteroids)
+      for(int k = 0; k < asteroids.size(); k++)
       {
-        a.redraw(g);
+        asteroids.get(k).redraw(g);
       }
-      for(Laser lz : lasers)
-        lz.redraw(g);
+      for(int k = 0; k < asteroids.size(); k++)
+      asteroids.get(k).redraw(g);
   }
 
   //whatever you want to do on each tick (currently 5 millis apart, check construtor for ActiveObject ticker to change interval)
@@ -71,7 +71,6 @@ public class HackProject extends JPanel {
     for(int k = 0; k < asteroids.size(); k++)
     {
       asteroids.get(k).drive();
-
       //if the asteroid is inside the panel, check its 
       if (asteroids.get(k).isActive())
       {
@@ -90,6 +89,7 @@ public class HackProject extends JPanel {
           System.out.println("Round Over");
           asteroids.remove(k);
           k--;
+          p();
         }
 
         //if the asteroid contains a laser, remove it and the laser
@@ -100,7 +100,7 @@ public class HackProject extends JPanel {
             k--;
             lasers.remove(j);
             j--;
-            System.out.println("Asteroid and Laser Removed");
+            p();
           }
       }
 
@@ -108,13 +108,12 @@ public class HackProject extends JPanel {
       else
       {
         boolean allIn = true;
-        for (Point pt : asteroids.get(k).getBoundingBox().getPoints())
+        for (Location pt : asteroids.get(k).getBoundingBox().getLocations())
           if (!bounds.contains(pt.x, pt.y))
            allIn = false;
         if(allIn)
         {
           asteroids.get(k).activate();
-          p();
         }
       }
     }
@@ -129,14 +128,16 @@ public class HackProject extends JPanel {
           System.out.println("Laser removed");
         }
     }
-      
+
     //n seconds interval
-    if (timer.getTimeElapsed()%2==0)
+    if (timer.getTimeElapsed()%50==0)
     {
-      asteroids.add(new Asteroid(Math.random()+.5));
+      asteroids.add(new Asteroid(1.5));
     }
-     repaint(); 
+
+    repaint(); 
   }
+
   int ct;
   void p()
   {

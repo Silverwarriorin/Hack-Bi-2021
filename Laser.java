@@ -12,7 +12,7 @@ public class Laser extends JPanel{
 	private int w;
 	private int h;
 	private Vector2D v;
-	private Point head;
+	private Location head;
 	private BufferedImage img;
 	
 	public Laser(double x, double y, double rads)
@@ -21,10 +21,7 @@ public class Laser extends JPanel{
 		this.y = (int) y;
 		v = new Vector2D();
 		v.setVector(1, rads);
-		w = 5;
-		h = 5;
-
-		head = new Point((int)x, (int)y);
+		head = new Location((int)x, (int)y);
 
 		try
 		{
@@ -44,9 +41,12 @@ public class Laser extends JPanel{
 		AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_BILINEAR);
 		op.filter(img, output);
 		img = output;
+
+		w = img.getWidth();
+		h = img.getHeight();
 	}
 
-	public Point getHead()
+	public Location getHead()
 	{
 		return head;
 	}
