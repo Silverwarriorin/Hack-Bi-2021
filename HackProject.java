@@ -66,11 +66,11 @@ public class HackProject extends JPanel {
   public void tick()
    {
      
-    ship.update();
+    ship.drive();
 
     for(Asteroid a : asteroids)
     {
-      a.update();
+      a.drive();
       if (ship.getBoundingBox().contains(a.getBoundingBox())>=0)
         ;//ENDROUND
      // if(bounds)
@@ -115,7 +115,7 @@ public class HackProject extends JPanel {
     shipDirection = Math.atan((e.getY()-ship.getShipY())/((double)e.getX()-ship.getShipX()));
     
     ship.setDirection(shipDirection);
-    repaint();
+    //repaint();
   }
 
   public void mouseClicked(MouseEvent e)
