@@ -28,6 +28,9 @@ public class HackProject extends JPanel {
       ship = new Spaceship();
       ship.setSpeed(20);
       ticker = new ActiveObject(this, 10);
+      
+      //set up the asteroids lists
+      asteroids = new ArrayList<Asteroid>();
 
   }
   
