@@ -9,6 +9,7 @@ public class Asteroid extends JPanel{
     private int xmax, xmin, ymax, ymin;
 
     private BoundingBox bounds;
+    private boolean approaching = true;
 
     public Asteroid(double speed)
     {
@@ -47,6 +48,8 @@ public class Asteroid extends JPanel{
         bounds = new BoundingBox(x, y, size, size);
     }
 
+
+
     public void drive()
     {
         double dx = Math.random() * (speed);
@@ -55,7 +58,7 @@ public class Asteroid extends JPanel{
         y+=dy;
         bounds.translate(dx, dy);
     
-        if(this.myX() >= 800)
+        /*if(this.myX() >= 800)
             setX(1);
 
         if(this.myY() >= 800)
@@ -65,7 +68,7 @@ public class Asteroid extends JPanel{
             setX(799);
 
         if(this.myY() <= 0)
-            setY(799);
+            setY(799);*/
     }
     public void redraw(Graphics g)
     {
@@ -98,6 +101,16 @@ public class Asteroid extends JPanel{
     public BoundingBox getBoundingBox()
     {
         return bounds;
+    }
+
+    public void activate()
+    {
+        approaching = false;
+    }
+
+    public boolean isActive()
+    {
+        return !approaching;
     }
 }
 
